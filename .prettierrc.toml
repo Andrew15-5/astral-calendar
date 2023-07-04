@@ -1,0 +1,7 @@
+semi = false
+singleQuote = true
+importOrderSortSpecifiers = true
+overrides = [
+  { files = "*.js", options = { semi = true } }
+]
+plugins = [ "@trivago/prettier-plugin-sort-imports" ]
