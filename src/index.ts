@@ -9,12 +9,15 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
+const public_dir = path.join(__dirname, '..', 'public')
+app.use('/static/styles', express.static(path.join(public_dir, 'styles')))
+
 app.get('/', (_request, response) => {
   response.redirect('/calendar/')
 })
 
 app.get('/calendar/', (_request, response) => {
-  response.status(200).sendFile(path.join(__dirname, '../public/main.html'))
+  response.status(200).sendFile(path.join(public_dir, 'main.html'))
 })
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
