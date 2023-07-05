@@ -18,4 +18,13 @@ for (const selector of selectors) {
       dropdown_menu.ariaExpanded = 'true'
     }
   })
+  document.body.addEventListener(
+    'click',
+    (event: FocusEvent) => {
+      if (event.target === dropdown_menu) return
+      dropdown_menu.style.display = 'none'
+      dropdown_menu.ariaExpanded = 'false'
+    },
+    { capture: true }
+  )
 }
