@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000
 
 const pages_dir = path.join(__dirname, 'pages')
 const public_dir = path.join(__dirname, '..', '..', 'public')
+
 app.use('/static/fonts', express.static(path.join(public_dir, 'fonts')))
 app.use('/static/styles', express.static(path.join(public_dir, 'styles')))
 app.use('/static/images', express.static(path.join(public_dir, 'images')))
