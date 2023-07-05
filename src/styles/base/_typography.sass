@@ -1,0 +1,29 @@
+// Copyright (C) 2023  Andrew Voynov
+// See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+@use "../mixins" as mix
+@use "../variables" as var
+
+@function font-url($version)
+  $prefix: "../fonts/" + var.$font + "/static/" + var.$font + "-"
+  @return $prefix + $version + ".ttf"
+
+@mixin -font-face-base($weight, $version)
+  font-family: var.$font
+  font-style: normal
+  font-weight: $weight
+  src: url(font-url($version))
+
+@font-face
+  @include -font-face-base(400, Regular)
+
+@font-face
+  @include -font-face-base(600, SemiBold)
+
+@font-face
+  @include -font-face-base(700, Bold)
+
+@font-face
+  @include -font-face-base(800, ExtraBold)
+
+:root
+  font-family: var.$font, var.$font-family
