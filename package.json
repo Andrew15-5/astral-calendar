@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "./build/index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.ts",
-    "build": "tsc && sass --no-source-map ./src/styles/main.sass:./public/styles/main.css",
+    "dev:server": "nodemon ./src/server/index.ts",
+    "build": "tsc -b && sass ./src/styles/main.sass:./public/styles/main.css",
     "start": "node .",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged",

@@ -9,7 +9,7 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
-const public_dir = path.join(__dirname, '..', 'public')
+const public_dir = path.join(__dirname, '..', '..', 'public')
 app.use('/static/styles', express.static(path.join(public_dir, 'styles')))
 
 app.get('/', (_request, response) => {
