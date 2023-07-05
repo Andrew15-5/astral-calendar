@@ -1,0 +1,41 @@
+{{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
+https://www.gnu.org/licenses/agpl-3.0.txt --}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <title>Календарь</title>
+  </head>
+  <body>
+    <div id="calendar" class="container">
+      <h3>Календарь бухгалтера</h3>
+      <div class="select-period-text">
+        Выберите интересующий период отчетности
+      </div>
+      <div class="selectors">
+        {{#each selectors}}
+        <div class="selector">
+          <button
+            id="{{name}}-dropdown-menu-toggle"
+            class="dropdown-toggle"
+            aria-controls="{{name}}-dropdown-menu"
+            aria-expanded="false"
+          >
+            <span>{{text}}</span>
+            <div class="vertical-line"></div>
+            <img src="/static/images/Стрелка маленькая left.svg" />
+          </button>
+          <div id="{{name}}-dropdown-menu" class="dropdown-menu">
+            {{#each items}}
+            <a class="dropdown-item" href="{{url}}">{{name}}</a>
+            {{/each}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <script type="text/javascript" src="/static/js/main.js"></script>
+  </body>
+</html>

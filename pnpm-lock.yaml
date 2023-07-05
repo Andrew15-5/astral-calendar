@@ -7,6 +7,9 @@ dependencies:
   express:
     specifier: ^4.18.2
     version: 4.18.2
+  hbs:
+    specifier: ^4.2.0
+    version: 4.2.0
 
 devDependencies:
   '@trivago/prettier-plugin-sort-imports':
@@ -15,6 +18,9 @@ devDependencies:
   '@types/express':
     specifier: ^4.17.17
     version: 4.17.17
+  '@types/hbs':
+    specifier: ^4.0.1
+    version: 4.0.1
   husky:
     specifier: ^8.0.0
     version: 8.0.3
@@ -321,6 +327,15 @@ packages:
       '@types/express-serve-static-core': 4.17.35
       '@types/qs': 6.9.7
       '@types/serve-static': 1.15.2
+    dev: true
+
+  /@types/hbs@4.0.1:
+    resolution:
+      {
+        integrity: sha512-kbgeYPLGOG8LQhqNlAvMm7vMz6Iu3IaXDEufpkEYT/viTko1ZlIrj+b6lvo4cAIDRkh6eg+JdKVZkriDGTisEw==,
+      }
+    dependencies:
+      handlebars: 4.7.7
     dev: true
 
   /@types/http-errors@2.0.1:
@@ -989,6 +1004,13 @@ packages:
       path-exists: 4.0.0
     dev: true
 
+  /foreachasync@3.0.0:
+    resolution:
+      {
+        integrity: sha512-J+ler7Ta54FwwNcx6wQRDhTIbNeyDcARMkOcguEqnEdtm0jKvN3Li3PDAb2Du3ubJYEWfYL83XMROXdsXAXycw==,
+      }
+    dev: false
+
   /forwarded@0.2.0:
     resolution:
       {
@@ -1084,6 +1106,21 @@ packages:
     engines: { node: '>=4' }
     dev: true
 
+  /handlebars@4.7.7:
+    resolution:
+      {
+        integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==,
+      }
+    engines: { node: '>=0.4.7' }
+    hasBin: true
+    dependencies:
+      minimist: 1.2.8
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.17.4
+
   /has-flag@3.0.0:
     resolution:
       {
@@ -1124,6 +1161,17 @@ packages:
     engines: { node: '>= 0.4.0' }
     dependencies:
       function-bind: 1.1.1
+    dev: false
+
+  /hbs@4.2.0:
+    resolution:
+      {
+        integrity: sha512-dQwHnrfWlTk5PvG9+a45GYpg0VpX47ryKF8dULVd6DtwOE6TEcYQXQ5QM6nyOx/h7v3bvEQbdn19EDAcfUAgZg==,
+      }
+    engines: { node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16 }
+    dependencies:
+      handlebars: 4.7.7
+      walk: 2.3.15
     dev: false
 
   /http-errors@2.0.0:
@@ -1459,6 +1507,12 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /minimist@1.2.8:
+    resolution:
+      {
+        integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==,
+      }
+
   /mri@1.2.0:
     resolution:
       {
@@ -1508,6 +1562,12 @@ packages:
       }
     engines: { node: '>= 0.6' }
     dev: false
+
+  /neo-async@2.6.2:
+    resolution:
+      {
+        integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==,
+      }
 
   /nodemon@2.0.22:
     resolution:
@@ -1952,6 +2012,13 @@ packages:
     engines: { node: '>=0.10.0' }
     dev: true
 
+  /source-map@0.6.1:
+    resolution:
+      {
+        integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==,
+      }
+    engines: { node: '>=0.10.0' }
+
   /statuses@2.0.1:
     resolution:
       {
@@ -2078,6 +2145,16 @@ packages:
     hasBin: true
     dev: true
 
+  /uglify-js@3.17.4:
+    resolution:
+      {
+        integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==,
+      }
+    engines: { node: '>=0.8.0' }
+    hasBin: true
+    requiresBuild: true
+    optional: true
+
   /undefsafe@2.0.5:
     resolution:
       {
@@ -2116,6 +2193,15 @@ packages:
     engines: { node: '>= 0.8' }
     dev: false
 
+  /walk@2.3.15:
+    resolution:
+      {
+        integrity: sha512-4eRTBZljBfIISK1Vnt69Gvr2w/wc3U6Vtrw7qiN5iqYJPH7LElcYh/iU4XWhdCy2dZqv1ToMyYlybDylfG/5Vg==,
+      }
+    dependencies:
+      foreachasync: 3.0.0
+    dev: false
+
   /which@2.0.2:
     resolution:
       {
@@ -2126,6 +2212,12 @@ packages:
     dependencies:
       isexe: 2.0.0
     dev: true
+
+  /wordwrap@1.0.0:
+    resolution:
+      {
+        integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==,
+      }
 
   /wrappy@1.0.2:
     resolution:
