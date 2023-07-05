@@ -1,3 +1,5 @@
+// Copyright (C) 2023  Andrew Voynov
+// See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 const month_dropdown_menu = document.getElementById('month-dropdown-menu')
 const month_dropdown_menu_toggle = document.getElementById(
   'month-dropdown-menu-toggle'
