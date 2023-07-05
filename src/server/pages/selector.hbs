@@ -1,0 +1,19 @@
+{{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
+https://www.gnu.org/licenses/agpl-3.0.txt --}}
+<div class="selector">
+  <button
+    id="{{name}}-dropdown-menu-toggle"
+    class="dropdown-toggle"
+    aria-controls="{{name}}-dropdown-menu"
+    aria-expanded="false"
+  >
+    <span>{{text}}</span>
+    <div class="vertical-line"></div>
+    <img src="/static/images/Стрелка маленькая left.svg" />
+  </button>
+  <div id="{{name}}-dropdown-menu" class="dropdown-menu">
+    {{#each items}}
+    <a class="dropdown-item" href="{{url}}">{{name}}</a>
+    {{/each}}
+  </div>
+</div>
