@@ -3,6 +3,7 @@
 import calendar from './calendar'
 import dotenv from 'dotenv'
 import express from 'express'
+import hbs from 'hbs'
 import path from 'path'
 
 dotenv.config()
@@ -17,6 +18,8 @@ app.use('/static/fonts', express.static(path.join(public_dir, 'fonts')))
 app.use('/static/styles', express.static(path.join(public_dir, 'styles')))
 app.use('/static/images', express.static(path.join(public_dir, 'images')))
 app.use('/static/js', express.static(path.join(public_dir, 'js')))
+
+hbs.registerPartials(pages_dir)
 
 app.set('view engine', 'hbs')
 app.set('views', pages_dir)
