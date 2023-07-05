@@ -1,17 +1,21 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
-const month_dropdown_menu = document.getElementById('month-dropdown-menu')
-const month_dropdown_menu_toggle = document.getElementById(
-  'month-dropdown-menu-toggle'
-)
-if (month_dropdown_menu_toggle && month_dropdown_menu) {
-  month_dropdown_menu_toggle.onclick = () => {
-    if (month_dropdown_menu.ariaExpanded === 'true') {
-      month_dropdown_menu.style.display = 'none'
-      month_dropdown_menu.ariaExpanded = 'false'
-    } else {
-      month_dropdown_menu.style.display = 'block'
-      month_dropdown_menu.ariaExpanded = 'true'
+const selectors = ['month', 'quater']
+
+for (const selector of selectors) {
+  const dropdown_menu = document.getElementById(`${selector}-dropdown-menu`)
+  const dropdown_menu_toggle = document.getElementById(
+    `${selector}-dropdown-menu-toggle`
+  )
+  if (dropdown_menu && dropdown_menu_toggle) {
+    dropdown_menu_toggle.onclick = () => {
+      if (dropdown_menu.ariaExpanded === 'true') {
+        dropdown_menu.style.display = 'none'
+        dropdown_menu.ariaExpanded = 'false'
+      } else {
+        dropdown_menu.style.display = 'block'
+        dropdown_menu.ariaExpanded = 'true'
+      }
     }
   }
 }
