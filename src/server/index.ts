@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 3000
 
 const public_dir = path.join(__dirname, '..', '..', 'public')
 app.use('/static/styles', express.static(path.join(public_dir, 'styles')))
+app.use('/static/images', express.static(path.join(public_dir, 'images')))
+app.use('/static/js', express.static(path.join(public_dir, 'js')))
 
 app.get('/', (_request, response) => {
   response.redirect('/calendar/')

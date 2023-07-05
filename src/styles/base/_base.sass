@@ -1,0 +1,11 @@
+// Copyright (C) 2023  Andrew Voynov
+// See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+@use "../variables" as var
+
+.container
+  max-width: var.$container-max-width
+  margin: 0 auto
+
+@media screen and (max-width: 414px)
+  .container
+    max-width: var.$mobile-container-max-width

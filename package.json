@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "./build/index.js",
   "scripts": {
+    "dev:client": "tsc -w -p ./src/client/",
     "dev:server": "nodemon ./src/server/index.ts",
     "build": "tsc -b && sass ./src/styles/main.sass:./public/styles/main.css",
     "start": "node .",

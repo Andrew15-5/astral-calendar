@@ -6,5 +6,30 @@
     <link rel="stylesheet" href="/static/styles/main.css" />
     <title>Календарь</title>
   </head>
-  <body></body>
+  <body>
+    <div id="calendar" class="container">
+      <h3>Календарь бухгалтера</h3>
+      <div class="select-period-text">
+        Выберите интересующий период отчетности
+      </div>
+      <div class="selector">
+        <button
+          id="month-dropdown-menu-toggle"
+          class="dropdown-toggle"
+          aria-controls="month-dropdown-menu"
+          aria-expanded="false"
+        >
+          <span>Месячная</span>
+          <div class="vertical-line"></div>
+          <img src="/static/images/Стрелка маленькая left.svg" />
+        </button>
+        <div id="month-dropdown-menu" class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/static/js/functions.js"></script>
+  </body>
 </html>
