@@ -1,8 +1,11 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+@use "variables" as var
+
 @mixin typography($color: false, $size, $bold: 400, $height: normal)
   @if $color
     color: $color
+  font-family: var.$font
   font-size: $size
   font-weight: $bold
   line-height: $height

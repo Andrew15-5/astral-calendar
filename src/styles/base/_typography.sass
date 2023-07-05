@@ -4,7 +4,7 @@
 @use "../variables" as var
 
 @function font-url($version)
-  $prefix: "../fonts/" + var.$font + "/static/" + var.$font + "-"
+  $prefix: "/static/fonts/" + var.$font + "/" + var.$font + "-"
   @return $prefix + $version + ".ttf"
 
 @mixin -font-face-base($weight, $version)
@@ -24,9 +24,6 @@
 
 @font-face
   @include -font-face-base(800, ExtraBold)
-
-:root
-  font-family: var.$font, var.$font-family
 
 body
   margin: 0
