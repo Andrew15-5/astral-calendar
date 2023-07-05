@@ -21,7 +21,10 @@ for (const selector of selectors) {
   document.body.addEventListener(
     'click',
     (event: FocusEvent) => {
+      // To make dropdown menu's items clickable we have to return
       if (event.target === dropdown_menu) return
+      // To make dropdown menu toggle's logic work we have to return
+      if (event.composedPath().includes(dropdown_menu_toggle)) return
       dropdown_menu.style.display = 'none'
       dropdown_menu.ariaExpanded = 'false'
     },
