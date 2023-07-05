@@ -7,15 +7,14 @@ for (const selector of selectors) {
   const dropdown_menu_toggle = document.getElementById(
     `${selector}-dropdown-menu-toggle`
   )
-  if (dropdown_menu && dropdown_menu_toggle) {
-    dropdown_menu_toggle.onclick = () => {
-      if (dropdown_menu.ariaExpanded === 'true') {
-        dropdown_menu.style.display = 'none'
-        dropdown_menu.ariaExpanded = 'false'
-      } else {
-        dropdown_menu.style.display = 'block'
-        dropdown_menu.ariaExpanded = 'true'
-      }
+  if (!dropdown_menu || !dropdown_menu_toggle) continue
+  dropdown_menu_toggle.addEventListener('click', () => {
+    if (dropdown_menu.ariaExpanded === 'true') {
+      dropdown_menu.style.display = 'none'
+      dropdown_menu.ariaExpanded = 'false'
+    } else {
+      dropdown_menu.style.display = 'block'
+      dropdown_menu.ariaExpanded = 'true'
     }
-  }
+  })
 }
