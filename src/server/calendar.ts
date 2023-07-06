@@ -94,10 +94,25 @@ namespace calendar {
         response.status(200).render('month', { year, month: month_str })
       }
       export function quater(
-        request: Request<{ year: string; quater: number }>,
+        request: Request<{ year: string; quater: string }>,
         response: Response
       ) {
-        const { year, quater } = request.params
+        const { year: year_str, quater: quater_str } = request.params
+        const [year, quater] = [year_str, quater_str].map((str) =>
+          Number.parseInt(str)
+        )
+
+        // Params' values check
+        if ([year, quater].includes(NaN)) {
+          response.redirect(make_url.no_params.main())
+        }
+        if (quater < 1) {
+          response.redirect(make_url.quater(year, 1))
+        } else if (quater > 4) {
+          response.redirect(make_url.quater(year, 4))
+        }
+
+        // Making calendars_data
         const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
         const matrix = []
         const row_length = 7
@@ -117,6 +132,7 @@ namespace calendar {
             'cell-matrix': matrix,
           })
         }
+
         response
           .status(200)
           .render('quater', { year, quater, calendars: calendars_data })
