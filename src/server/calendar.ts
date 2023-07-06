@@ -106,7 +106,26 @@ namespace calendar {
         }
 
         const month_string = `${month < 10 ? '0' : ''}${month}`
-        response.status(200).render('month', { year, month: month_string })
+
+        // Making calendar_data
+        const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
+        const matrix = []
+        const row_length = 7
+        while (cells.length > 0) {
+          matrix.push(cells.splice(0, row_length))
+        }
+        const month_name = month_names[month - 1]
+        const calendar_data: CalendarData = {
+          'show-arrows': true,
+          'month-year-text': `${month_name} ${year}`,
+          'cell-matrix': matrix,
+        }
+
+        response.status(200).render('month', {
+          year,
+          month: month_string,
+          calendar: calendar_data,
+        })
       }
       export function quater(
         request: Request<{ year: string; quater: string }>,
