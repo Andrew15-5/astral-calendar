@@ -86,12 +86,26 @@ namespace calendar {
         response.status(200).render('main', { selectors: get_selectors_data() })
       }
       export function month(
-        request: Request<{ year: string; month: number }>,
+        request: Request<{ year: string; month: string }>,
         response: Response
       ) {
-        const { year, month } = request.params
-        let month_str = `${month < 10 ? '0' : ''}${month}`
-        response.status(200).render('month', { year, month: month_str })
+        const { year: year_str, month: month_str } = request.params
+        const [year, month] = [year_str, month_str].map((str) =>
+          Number.parseInt(str)
+        )
+
+        // Params' values check
+        if ([year, month].includes(NaN)) {
+          response.redirect(make_url.no_params.main())
+        }
+        if (month < 1) {
+          response.redirect(make_url.month(year, 1))
+        } else if (month > 12) {
+          response.redirect(make_url.month(year, 12))
+        }
+
+        const month_string = `${month < 10 ? '0' : ''}${month}`
+        response.status(200).render('month', { year, month: month_string })
       }
       export function quater(
         request: Request<{ year: string; quater: string }>,
