@@ -25,8 +25,8 @@ app.set('view engine', 'hbs')
 app.set('views', pages_dir)
 
 app.get('/', (_request, response) => response.redirect('/calendar/'))
-app.get(calendar.make_url.no_params.main(), calendar.get_main)
-app.get(calendar.make_url.no_params.month(), calendar.get_month)
-app.get(calendar.make_url.no_params.quater(), calendar.get_quater)
+app.get(calendar.make_url.no_params.main(), calendar.api.get.main)
+app.get(calendar.make_url.no_params.month(), calendar.api.get.month)
+app.get(calendar.make_url.no_params.quater(), calendar.api.get.quater)
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

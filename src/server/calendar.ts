@@ -80,45 +80,48 @@ namespace calendar {
       return `${no_params.main()}/${year}/quater/${quater}`
     }
   }
-
-  export function get_main(_request: Request, response: Response) {
-    response.status(200).render('main', { selectors: get_selectors_data() })
-  }
-  export function get_month(
-    request: Request<{ year: string; month: number }>,
-    response: Response
-  ) {
-    const { year, month } = request.params
-    let month_str = `${month < 10 ? '0' : ''}${month}`
-    response.status(200).render('month', { year, month: month_str })
-  }
-  export function get_quater(
-    request: Request<{ year: string; quater: number }>,
-    response: Response
-  ) {
-    const { year, quater } = request.params
-    const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
-    const matrix = []
-    const row_length = 7
-    while (cells.length > 0) {
-      matrix.push(cells.splice(0, row_length))
+  export namespace api {
+    export namespace get {
+      export function main(_request: Request, response: Response) {
+        response.status(200).render('main', { selectors: get_selectors_data() })
+      }
+      export function month(
+        request: Request<{ year: string; month: number }>,
+        response: Response
+      ) {
+        const { year, month } = request.params
+        let month_str = `${month < 10 ? '0' : ''}${month}`
+        response.status(200).render('month', { year, month: month_str })
+      }
+      export function quater(
+        request: Request<{ year: string; quater: number }>,
+        response: Response
+      ) {
+        const { year, quater } = request.params
+        const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
+        const matrix = []
+        const row_length = 7
+        while (cells.length > 0) {
+          matrix.push(cells.splice(0, row_length))
+        }
+        const first_month_index = (quater - 1) * 3
+        const last_month_index = first_month_index + 2
+        const quater_month_names = []
+        for (let i = first_month_index; i <= last_month_index; i++) {
+          quater_month_names.push(month_names[i])
+        }
+        const calendars_data: CalendarData[] = []
+        for (const month_name of quater_month_names) {
+          calendars_data.push({
+            'month-year-text': `${month_name} ${year}`,
+            'cell-matrix': matrix,
+          })
+        }
+        response
+          .status(200)
+          .render('quater', { year, quater, calendars: calendars_data })
+      }
     }
-    const first_month_index = (quater - 1) * 3
-    const last_month_index = first_month_index + 2
-    const quater_month_names = []
-    for (let i = first_month_index; i <= last_month_index; i++) {
-      quater_month_names.push(month_names[i])
-    }
-    const calendars_data: CalendarData[] = []
-    for (const month_name of quater_month_names) {
-      calendars_data.push({
-        'month-year-text': `${month_name} ${year}`,
-        'cell-matrix': matrix,
-      })
-    }
-    response
-      .status(200)
-      .render('quater', { year, quater, calendars: calendars_data })
   }
 }
 
