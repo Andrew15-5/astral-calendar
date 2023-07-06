@@ -56,6 +56,7 @@ function get_selectors_data() {
 }
 
 type CalendarData = {
+  'show-arrows': boolean
   'month-year-text': string
   'cell-matrix': number[][]
 }
@@ -142,6 +143,7 @@ namespace calendar {
         const calendars_data: CalendarData[] = []
         for (const month_name of quater_month_names) {
           calendars_data.push({
+            'show-arrows': false,
             'month-year-text': `${month_name} ${year}`,
             'cell-matrix': matrix,
           })
