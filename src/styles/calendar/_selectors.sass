@@ -2,9 +2,6 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 @use "../variables" as var
 
-// Тень / XS
-$dropdown-menu-shadow: 0px 2px 4px 0px rgba(166, 171, 189, 0.40), 0px 0px 2px 0px rgba(166, 171, 189, 0.24)
-
 #calendar
   .select-period-text
     margin-top: 24px
@@ -45,7 +42,7 @@ $dropdown-menu-shadow: 0px 2px 4px 0px rgba(166, 171, 189, 0.40), 0px 0px 2px 0p
     display: none
     position: absolute
     background: var.$white
-    box-shadow: $dropdown-menu-shadow
+    box-shadow: var.$shadow-xs
     margin-top: 4px
 
   .dropdown-item
