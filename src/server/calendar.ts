@@ -97,12 +97,12 @@ namespace calendar {
 
         // Params' values check
         if ([year, month].includes(NaN)) {
-          response.redirect(make_url.no_params.main())
+          return response.redirect(make_url.no_params.main())
         }
         if (month < 1) {
-          response.redirect(make_url.month(year, 1))
+          return response.redirect(make_url.month(year, 1))
         } else if (month > 12) {
-          response.redirect(make_url.month(year, 12))
+          return response.redirect(make_url.month(year, 12))
         }
 
         const month_string = `${month < 10 ? '0' : ''}${month}`
@@ -119,12 +119,12 @@ namespace calendar {
 
         // Params' values check
         if ([year, quater].includes(NaN)) {
-          response.redirect(make_url.no_params.main())
+          return response.redirect(make_url.no_params.main())
         }
         if (quater < 1) {
-          response.redirect(make_url.quater(year, 1))
+          return response.redirect(make_url.quater(year, 1))
         } else if (quater > 4) {
-          response.redirect(make_url.quater(year, 4))
+          return response.redirect(make_url.quater(year, 4))
         }
 
         // Making calendars_data
