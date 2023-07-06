@@ -61,6 +61,26 @@ type CalendarData = {
 }
 
 namespace calendar {
+  export namespace make_url {
+    export namespace no_params {
+      export function main() {
+        return '/calendar'
+      }
+      export function month() {
+        return make_url.month(':year', ':month')
+      }
+      export function quater() {
+        return make_url.quater(':year', ':quater')
+      }
+    }
+    export function month(year: number | string, month: number | string) {
+      return `${no_params.main()}/${year}/month/${month}`
+    }
+    export function quater(year: number | string, quater: number | string) {
+      return `${no_params.main()}/${year}/quater/${quater}`
+    }
+  }
+
   export function get_main(_request: Request, response: Response) {
     response.status(200).render('main', { selectors: get_selectors_data() })
   }
