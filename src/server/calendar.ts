@@ -59,11 +59,16 @@ namespace calendar {
   export function get_main(_request: Request, response: Response) {
     response.status(200).render('main', { selectors: get_selectors_data() })
   }
-  export function get_month(_request: Request, response: Response) {
-    response.redirect('/calendar/')
+  export function get_month(request: Request, response: Response) {
+    let { year, month } = request.params
+    if (Number.parseInt(month) < 10) {
+      month = '0' + month
+    }
+    response.status(200).render('month', { year, month })
   }
-  export function get_quater(_request: Request, response: Response) {
-    response.redirect('/calendar/')
+  export function get_quater(request: Request, response: Response) {
+    let { year, quater } = request.params
+    response.status(200).render('quater', { year, quater })
   }
 }
 
