@@ -71,7 +71,7 @@ namespace calendar {
     request: Request<{ year: string; quater: string }>,
     response: Response
   ) {
-    let { year, quater } = request.params
+    const { year, quater } = request.params
     response.status(200).render('quater', { year, quater })
   }
 }
