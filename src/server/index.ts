@@ -26,5 +26,7 @@ app.set('views', pages_dir)
 
 app.get('/', (_request, response) => response.redirect('/calendar/'))
 app.get('/calendar/', calendar.get_main)
+app.get('/calendar/:year/month/:month', calendar.get_month)
+app.get('/calendar/:year/quater/:quater', calendar.get_quater)
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

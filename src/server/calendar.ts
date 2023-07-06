@@ -59,6 +59,12 @@ namespace calendar {
   export function get_main(_request: Request, response: Response) {
     response.status(200).render('main', { selectors: get_selectors_data() })
   }
+  export function get_month(_request: Request, response: Response) {
+    response.redirect('/calendar/')
+  }
+  export function get_quater(_request: Request, response: Response) {
+    response.redirect('/calendar/')
+  }
 }
 
 export default calendar
