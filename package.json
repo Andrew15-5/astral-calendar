@@ -8,7 +8,6 @@
     "build": "tsc -b && sass ./src/styles/main.sass:./public/styles/main.css",
     "start": "node .",
     "prepare": "husky install",
-    "pretty-quick": "pretty-quick --staged",
     "sass": "sass --watch ./src/styles/main.sass:./public/styles/main.css"
   },
   "keywords": [],
