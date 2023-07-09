@@ -1,10 +1,11 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
-import calendar from './calendar'
 import dotenv from 'dotenv'
 import express from 'express'
 import hbs from 'hbs'
 import path from 'path'
+
+import calendar from './calendar'
 
 dotenv.config()
 
