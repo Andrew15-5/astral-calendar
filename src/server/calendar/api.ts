@@ -37,14 +37,13 @@ function make_url_of_selector_item(
   switch (selector) {
     case 'month':
       index = element_index + 1 // 1 -> January, ..., 12 -> December
-      break
+      return make_url.month(current_year, index)
     case 'quater':
       index = element_index + 1 // [1; 4]
-      break
+      return make_url.quater(current_year, index)
     case 'year':
       return 'javascript: alert("Not yet implemented")'
   }
-  return `/calendar/${current_year}/${selector}/${index}`
 }
 
 function get_selectors_data() {
