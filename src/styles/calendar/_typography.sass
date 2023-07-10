@@ -1,6 +1,8 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 @use "../mixins" as mix
+@use "../variables" as var
+
 #calendar
   .select-period-text
     // Text / L (18, Regular)
@@ -12,3 +14,16 @@
   .dropdown-item
     // Text / S (12, Regular)
     @include mix.typography($size: 12px)
+
+  .report
+    .deadline
+      @include mix.typography($size: 14px)
+
+    .day-number
+      @include mix.typography($size: 14px, $bold: 700)
+
+    .name
+      @include mix.typography($color: var.$branded-blue, $size: 16px)
+
+    .period
+      @include mix.typography($size: 16px)

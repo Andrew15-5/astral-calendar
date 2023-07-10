@@ -2,6 +2,8 @@
 
 ## Usage
 
+Note: You have to add [`DATA_CSV`](#environment-variables) file to project.
+
 ### Production (not optimized)
 
 ```shell
@@ -27,3 +29,8 @@ You can also add auto update when developing styles:
   </head>
 </html>
 ```
+
+## Environment variables
+
+- `PORT` --- port on which the server will be started (default: `3000`)
+- `DATA_CSV` --- file (in root dir) which holds reports data (default: `data.csv`)

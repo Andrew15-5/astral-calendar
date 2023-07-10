@@ -2,7 +2,7 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { Request, Response } from 'express'
 
-import { make_url } from './make_url'
+import { make_url, reports } from './index'
 
 const month_names = [
   'Январь',
@@ -104,24 +104,25 @@ export namespace api {
         calendar: calendar_data,
       })
     }
-    export function quater(
+    export async function quater(
       request: Request<{ year: string; quater: string }>,
       response: Response
     ) {
       const { year: year_str, quater: quater_str } = request.params
-      const [year, quater] = [year_str, quater_str].map((str) =>
+      const [year_test, quater_test] = [year_str, quater_str].map((str) =>
         Number.parseInt(str)
       )
 
       // Params' values check
-      if ([year, quater].includes(NaN)) {
+      if ([year_test, quater_test].includes(NaN)) {
         return response.redirect(make_url.no_params.main())
       }
-      if (quater < 1) {
-        return response.redirect(make_url.quater(year, 1))
-      } else if (quater > 4) {
-        return response.redirect(make_url.quater(year, 4))
+      if (quater_test < 1) {
+        return response.redirect(make_url.quater(year_test, 1))
+      } else if (quater_test > 4) {
+        return response.redirect(make_url.quater(year_test, 4))
       }
+      const [year, quater] = [year_test, quater_test as Quater]
 
       // Making calendars_data
       const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
@@ -145,9 +146,12 @@ export namespace api {
         })
       }
 
-      response
-        .status(200)
-        .render('quater', { year, quater, calendars: calendars_data })
+      response.status(200).render('quater', {
+        year,
+        quater,
+        calendars: calendars_data,
+        reports: await reports.quater(year, quater),
+      })
     }
   }
 }
