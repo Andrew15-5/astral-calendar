@@ -5,9 +5,9 @@
   "scripts": {
     "dev:client": "tsc -w -p ./src/client/",
     "dev:server": "tsnd --project ./src/server --watch ./src/server/pages --transpile-only ./src/server/index.ts",
-    "build": "tsc -b && sass ./src/styles/main.sass:./public/styles/main.css",
+    "build": "tsc -b && cp -r ./src/server/pages ./build/ && sass ./src/styles/main.sass:./public/styles/main.css",
     "start": "node .",
-    "prepare": "husky install",
+    "prepare": "[ -x \"$(command -v husky)\" ] && [ -d .git ] && husky install || true",
     "sass": "sass --watch ./src/styles/main.sass:./public/styles/main.css"
   },
   "keywords": [],

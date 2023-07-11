@@ -6,17 +6,40 @@ Note: You have to add [`DATA_CSV`](#environment-variables) file to project.
 
 ### Production (not optimized)
 
+`pnpm` (default):
+
 ```shell
+pnpm install --frozen-lockfile
+pnpm build
+NODE_ENV=production pnpm install --frozen-lockfile
+pnpm start # files are in build/ & public/
+```
+
+`yarn`:
+
+```shell
+yarn
+yarn build
+NODE_ENV=production yarn --frozen-lockfile
+yarn start
+```
+
+`npm`:
+
+```shell
+npm install
 npm run build
-node . # files are in build/ & public/
+NODE_ENV=production npm ci
+npm start
 ```
 
 ### Development
 
 ```shell
-npm run dev:server # watch TS files for server
-npm run dev:client # watch TS files for client
-npm run sass # watch SASS files
+pnpm install # You can also use yarn/npm
+pnpm run dev:server # watch TS files for server
+pnpm run dev:client # watch TS files for client
+pnpm run sass # watch SASS files
 ```
 
 You can also add auto update when developing styles:
