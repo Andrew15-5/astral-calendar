@@ -2,4 +2,6 @@
 /build/
 /public/styles/*.css
 /public/styles/*.css.map
-/public/js/
+/public/js/*
+!/public/js/bootstrap*.min.js
+!/public/js/jquery*.min.js
