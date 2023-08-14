@@ -2,8 +2,14 @@
 https://www.gnu.org/licenses/agpl-3.0.txt --}}
 <!DOCTYPE html>
 <html lang="en">
-  {{> head title="Календарь"}} {{#> body_container}} {{#> calendar_container}}
-  <div class="select-period-text">Выберите интересующий период отчетности</div>
-  <div class="selectors">{{#each selectors}} {{> selector}} {{/each}}</div>
-  {{/ calendar_container}} {{/ body_container}}
+  {{> head title="Календарь"}}
+  <body>
+    {{#> calendar_container}}
+    <div class="select-period-text">
+      Выберите интересующий период отчетности
+    </div>
+    <div class="selectors">{{#each selectors}} {{> selector}} {{/each}}</div>
+    {{/ calendar_container}}
+    <script type="text/javascript" src="/static/js/selectors.js"></script>
+  </body>
 </html>

@@ -2,11 +2,14 @@
 https://www.gnu.org/licenses/agpl-3.0.txt --}}
 <!DOCTYPE html>
 <html lang="en">
-  {{> head title="Календарь"}} {{#> body_container}} {{#> calendar_container}}
-  <div class="calendars">{{#each calendars}} {{> calendar}} {{/each}}</div>
-  <h3 class="report-period">Отчётность за Q{{quarter}} {{year}} г.</h3>
-  <ol class="report-list">
-    {{#each reports}} {{> report}} {{/each}}
-  </ol>
-  {{/ calendar_container}} {{/ body_container}}
+  {{> head title="Календарь"}}
+  <body>
+    {{#> calendar_container}}
+    <div class="calendars">{{#each calendars}} {{> calendar}} {{/each}}</div>
+    <h3 class="report-period">Отчётность за Q{{quarter}} {{year}} г.</h3>
+    <ol class="report-list">
+      {{#each reports}} {{> report}} {{/each}}
+    </ol>
+    {{/ calendar_container}}
+  </body>
 </html>
