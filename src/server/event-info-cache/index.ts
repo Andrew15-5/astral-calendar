@@ -9,6 +9,10 @@ function log(message?: any) {
   console.log('cache>', message)
 }
 
+function error(message?: any) {
+  console.error('cache❗>', message)
+}
+
 // Row scheme:
 // Название,Активность,Сортировка,"Дата изменения",ID,"Дата начала","Дата сдачи"
 // Required data is in: first, last - 1, last
@@ -113,6 +117,11 @@ export function start_caching() {
     spreadsheet_file_regex_flags
   )
 
+  if (!fs.existsSync(data_dir)) {
+    error(`Can't access dir (${data_dir}/), creating`)
+    fs.mkdirSync(data_dir, { mode: 0o775 })
+  }
+
   log(`Watching spreadsheet files in ${data_dir}/`)
   dir_watcher = fs.watch(data_dir, (_event, filename) => {
     if (filename === null || !spreadsheet_file_regex.test(filename)) return
@@ -131,20 +140,14 @@ export function start_caching() {
 
   const files = []
 
-  try {
-    files.push(
-      ...fs
-        .readdirSync(data_dir)
-        .filter((name) => spreadsheet_file_regex.test(name))
-    )
-  } catch {
-    console.error("can't access dir")
-    process.exit(1)
-  }
+  files.push(
+    ...fs
+      .readdirSync(data_dir)
+      .filter((name) => spreadsheet_file_regex.test(name))
+  )
 
   if (files.length === 0) {
-    console.error('No spreadsheet files were detected on start')
-    process.exit(1)
+    error('No spreadsheet files were detected on start')
   }
 
   for (const file of files) {
