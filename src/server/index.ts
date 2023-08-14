@@ -6,8 +6,10 @@ import hbs from 'hbs'
 import path from 'path'
 
 import calendar from './calendar'
+import cache from './event-info-cache'
 
 dotenv.config()
+cache.start_caching()
 
 const app = express()
 const PORT = process.env.PORT || 3000

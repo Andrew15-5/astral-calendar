@@ -1,25 +1,11 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
-import csv from 'csv-parse/sync'
-import fs from 'fs'
+import cache from '../event-info-cache'
 
 const week_days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
 
-async function get_report_data(): Promise<ReportData[]> {
-  let csv_buffer: Buffer
-  try {
-    csv_buffer = fs.readFileSync(process.env.DATA_CSV || 'data.csv')
-  } catch (error) {
-    return []
-  }
-  const init_data: string[][] = csv.parse(csv_buffer, { fromLine: 2 })
-  return init_data
-    .map((row) => ({
-      name: row[0],
-      begin: new Date(row[row.length - 2]),
-      end: new Date(row[row.length - 1]),
-    }))
-    .sort((a, b) => (a.end < b.end ? -1 : 1)) // Sort by deadline
+async function get_event_info_list(): Promise<EventInfo[]> {
+  return cache.get_event_info_list_from_cache()
 }
 
 function format_date(date: Date) {
@@ -44,16 +30,14 @@ export namespace report {
       const quater_end = new Date(
         quater < 4 ? `${year}-${quater * 3 + 1}` : `${year + 1}-${1}`
       )
-      return (await get_report_data())
-        .filter(
-          (report) => report.end >= quater_begin && report.end < quater_end
-        )
-        .map((report) => ({
-          'week-day': week_days[report.end.getDay() - 1],
-          'month-day': report.end.getDate(),
-          name: report.name,
-          begin: format_date(report.begin),
-          end: format_date(report.end),
+      return (await get_event_info_list())
+        .filter((event) => event.end >= quater_begin && event.end < quater_end)
+        .map((event) => ({
+          'week-day': week_days[event.end.getDay() - 1],
+          'month-day': event.end.getDate(),
+          name: event.name,
+          begin: format_date(event.begin),
+          end: format_date(event.end),
         }))
     }
   }

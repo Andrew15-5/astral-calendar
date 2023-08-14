@@ -8,9 +8,3 @@ type CalendarData = {
   'month-year-text': string
   'cell-matrix': number[][]
 }
-
-type ReportData = {
-  name: string
-  begin: Date
-  end: Date
-}
