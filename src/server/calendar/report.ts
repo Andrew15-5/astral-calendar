@@ -2,7 +2,7 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import cache from '../event-info-cache'
 
-const week_days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+import { week_days } from './i18n/ru/strings'
 
 async function get_event_info_list(): Promise<EventInfo[]> {
   return cache.get_event_info_list_from_cache()

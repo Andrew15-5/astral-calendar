@@ -2,31 +2,12 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { Request, Response } from 'express'
 
+import { month_names, quater_names, selector_text } from './i18n/ru/strings'
 import { make_url, report } from './index'
-
-const month_names = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-]
-
-const quater_names = ['Первый', 'Второй', 'Третий', 'Четвертый'].map(
-  (name) => name + ' квартал'
-)
 
 const years = [2020, 2021, 2022]
 
 const selector_names: SelectorName[] = ['month', 'quater', 'year']
-const selector_text = ['Месячная', 'Квартальная', 'Годовая']
 const selector_data = [month_names, quater_names, years]
 
 function make_url_of_selector_item(
@@ -83,8 +64,6 @@ export namespace api {
       }
       const [year, month] = [year_test, month_test as Month]
 
-      const month_string = `${month < 10 ? '0' : ''}${month}`
-
       // Making calendar_data
       const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
       const matrix = []
@@ -101,7 +80,7 @@ export namespace api {
 
       response.status(200).render('month', {
         year,
-        month: month_string,
+        month: month_names[month],
         calendar: calendar_data,
         reports: await report.for_render.month(year, month),
       })
