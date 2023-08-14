@@ -2,7 +2,7 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { Request, Response } from 'express'
 
-import { make_url, reports } from './index'
+import { make_url, report } from './index'
 
 const month_names = [
   'Январь',
@@ -150,7 +150,7 @@ export namespace api {
         year,
         quater,
         calendars: calendars_data,
-        reports: await reports.quater(year, quater),
+        reports: await report.for_render.quater(year, quater),
       })
     }
   }

@@ -31,20 +31,30 @@ function format_date(date: Date) {
   return `${year}/${month_str}/${day_str}`
 }
 
-export namespace reports {
-  export async function quater(year: number, quater: Quater) {
-    const quater_begin = new Date(`${year}-${(quater - 1) * 3 + 1}`)
-    const quater_end = new Date(
-      quater < 4 ? `${year}-${quater * 3 + 1}` : `${year + 1}-${1}`
-    )
-    return (await get_report_data())
-      .filter((report) => report.end >= quater_begin && report.end < quater_end)
-      .map((report) => ({
-        'week-day': week_days[report.end.getDay() - 1],
-        'month-day': report.end.getDate(),
-        name: report.name,
-        begin: format_date(report.begin),
-        end: format_date(report.end),
-      }))
+export namespace report {
+  export namespace for_render {
+    /**
+     * @param year quater's year
+     * @param quater quater's ordinal number [1;4]
+     *
+     * @returns quater's report data for rendering
+     */
+    export async function quater(year: number, quater: Quater) {
+      const quater_begin = new Date(`${year}-${(quater - 1) * 3 + 1}`)
+      const quater_end = new Date(
+        quater < 4 ? `${year}-${quater * 3 + 1}` : `${year + 1}-${1}`
+      )
+      return (await get_report_data())
+        .filter(
+          (report) => report.end >= quater_begin && report.end < quater_end
+        )
+        .map((report) => ({
+          'week-day': week_days[report.end.getDay() - 1],
+          'month-day': report.end.getDate(),
+          name: report.name,
+          begin: format_date(report.begin),
+          end: format_date(report.end),
+        }))
+    }
   }
 }
