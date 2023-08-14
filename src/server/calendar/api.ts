@@ -63,24 +63,25 @@ export namespace api {
     export function main(_request: Request, response: Response) {
       response.status(200).render('main', { selectors: get_selectors_data() })
     }
-    export function month(
+    export async function month(
       request: Request<{ year: string; month: string }>,
       response: Response
     ) {
       const { year: year_str, month: month_str } = request.params
-      const [year, month] = [year_str, month_str].map((str) =>
+      const [year_test, month_test] = [year_str, month_str].map((str) =>
         Number.parseInt(str)
       )
 
       // Params' values check
-      if ([year, month].includes(NaN)) {
+      if ([year_test, month_test].includes(NaN)) {
         return response.redirect(make_url.no_params.main())
       }
-      if (month < 1) {
-        return response.redirect(make_url.month(year, 1))
-      } else if (month > 12) {
-        return response.redirect(make_url.month(year, 12))
+      if (month_test < 1) {
+        return response.redirect(make_url.month(year_test, 1))
+      } else if (month_test > 12) {
+        return response.redirect(make_url.month(year_test, 12))
       }
+      const [year, month] = [year_test, month_test as Month]
 
       const month_string = `${month < 10 ? '0' : ''}${month}`
 
@@ -102,6 +103,7 @@ export namespace api {
         year,
         month: month_string,
         calendar: calendar_data,
+        reports: await report.for_render.month(year, month),
       })
     }
     export async function quater(

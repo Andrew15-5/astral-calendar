@@ -20,6 +20,27 @@ function format_date(date: Date) {
 export namespace report {
   export namespace for_render {
     /**
+     * @param year month of which year
+     * @param month month's ordinal number [1;12]
+     *
+     * @returns month's report data for rendering
+     */
+    export async function month(year: number, month: Month) {
+      const month_begin = new Date(`${year}-${month}`)
+      const month_end = new Date(
+        month < 12 ? `${year}-${month + 1}` : `${year + 1}-${1}`
+      )
+      return (await get_event_info_list())
+        .filter((event) => event.end >= month_begin && event.end < month_end)
+        .map((event) => ({
+          'week-day': week_days[event.end.getDay() - 1],
+          'month-day': event.end.getDate(),
+          name: event.name,
+          begin: format_date(event.begin),
+          end: format_date(event.end),
+        }))
+    }
+    /**
      * @param year quater's year
      * @param quater quater's ordinal number [1;4]
      *
