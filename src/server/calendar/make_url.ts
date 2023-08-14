@@ -8,14 +8,14 @@ export namespace make_url {
     export function month() {
       return make_url.month(':year', ':month')
     }
-    export function quater() {
-      return make_url.quater(':year', ':quater')
+    export function quarter() {
+      return make_url.quarter(':year', ':quarter')
     }
   }
   export function month(year: number | string, month: number | string) {
     return `${no_params.main()}/${year}/month/${month}`
   }
-  export function quater(year: number | string, quater: number | string) {
-    return `${no_params.main()}/${year}/quater/${quater}`
+  export function quarter(year: number | string, quarter: number | string) {
+    return `${no_params.main()}/${year}/quarter/${quarter}`
   }
 }

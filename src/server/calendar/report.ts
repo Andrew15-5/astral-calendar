@@ -41,18 +41,20 @@ export namespace report {
         }))
     }
     /**
-     * @param year quater's year
-     * @param quater quater's ordinal number [1;4]
+     * @param year quarter's year
+     * @param quarter quarter's ordinal number [1;4]
      *
-     * @returns quater's report data for rendering
+     * @returns quarter's report data for rendering
      */
-    export async function quater(year: number, quater: Quater) {
-      const quater_begin = new Date(`${year}-${(quater - 1) * 3 + 1}`)
-      const quater_end = new Date(
-        quater < 4 ? `${year}-${quater * 3 + 1}` : `${year + 1}-${1}`
+    export async function quarter(year: number, quarter: Quater) {
+      const quarter_begin = new Date(`${year}-${(quarter - 1) * 3 + 1}`)
+      const quarter_end = new Date(
+        quarter < 4 ? `${year}-${quarter * 3 + 1}` : `${year + 1}-${1}`
       )
       return (await get_event_info_list())
-        .filter((event) => event.end >= quater_begin && event.end < quater_end)
+        .filter(
+          (event) => event.end >= quarter_begin && event.end < quarter_end
+        )
         .map((event) => ({
           'week-day': week_days[event.end.getDay() - 1],
           'month-day': event.end.getDate(),

@@ -1,7 +1,7 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
-type SelectorName = 'month' | 'quater' | 'year'
-const selectors: SelectorName[] = ['month', 'quater', 'year']
+type SelectorName = 'month' | 'quarter' | 'year'
+const selectors: SelectorName[] = ['month', 'quarter', 'year']
 
 for (const selector of selectors) {
   const dropdown_menu = document.getElementById(`${selector}-dropdown-menu`)

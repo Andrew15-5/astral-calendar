@@ -2,13 +2,13 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { Request, Response } from 'express'
 
-import { month_names, quater_names, selector_text } from './i18n/ru/strings'
+import { month_names, quarter_names, selector_text } from './i18n/ru/strings'
 import { make_url, report } from './index'
 
 const years = [2020, 2021, 2022]
 
-const selector_names: SelectorName[] = ['month', 'quater', 'year']
-const selector_data = [month_names, quater_names, years]
+const selector_names: SelectorName[] = ['month', 'quarter', 'year']
+const selector_data = [month_names, quarter_names, years]
 
 function make_url_of_selector_item(
   selector: SelectorName,
@@ -20,9 +20,9 @@ function make_url_of_selector_item(
     case 'month':
       index = element_index + 1 // 1 -> January, ..., 12 -> December
       return make_url.month(current_year, index)
-    case 'quater':
+    case 'quarter':
       index = element_index + 1 // [1; 4]
-      return make_url.quater(current_year, index)
+      return make_url.quarter(current_year, index)
     case 'year':
       return 'javascript: alert("Not yet implemented")'
   }
@@ -85,25 +85,25 @@ export namespace api {
         reports: await report.for_render.month(year, month),
       })
     }
-    export async function quater(
-      request: Request<{ year: string; quater: string }>,
+    export async function quarter(
+      request: Request<{ year: string; quarter: string }>,
       response: Response
     ) {
-      const { year: year_str, quater: quater_str } = request.params
-      const [year_test, quater_test] = [year_str, quater_str].map((str) =>
+      const { year: year_str, quarter: quarter_str } = request.params
+      const [year_test, quarter_test] = [year_str, quarter_str].map((str) =>
         Number.parseInt(str)
       )
 
       // Params' values check
-      if ([year_test, quater_test].includes(NaN)) {
+      if ([year_test, quarter_test].includes(NaN)) {
         return response.redirect(make_url.no_params.main())
       }
-      if (quater_test < 1) {
-        return response.redirect(make_url.quater(year_test, 1))
-      } else if (quater_test > 4) {
-        return response.redirect(make_url.quater(year_test, 4))
+      if (quarter_test < 1) {
+        return response.redirect(make_url.quarter(year_test, 1))
+      } else if (quarter_test > 4) {
+        return response.redirect(make_url.quarter(year_test, 4))
       }
-      const [year, quater] = [year_test, quater_test as Quater]
+      const [year, quarter] = [year_test, quarter_test as Quater]
 
       // Making calendars_data
       const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
@@ -112,14 +112,14 @@ export namespace api {
       while (cells.length > 0) {
         matrix.push(cells.splice(0, row_length))
       }
-      const first_month_index = (quater - 1) * 3
+      const first_month_index = (quarter - 1) * 3
       const last_month_index = first_month_index + 2
-      const quater_month_names = []
+      const quarter_month_names = []
       for (let i = first_month_index; i <= last_month_index; i++) {
-        quater_month_names.push(month_names[i])
+        quarter_month_names.push(month_names[i])
       }
       const calendars_data: CalendarData[] = []
-      for (const month_name of quater_month_names) {
+      for (const month_name of quarter_month_names) {
         calendars_data.push({
           'show-arrows': false,
           'month-year-text': `${month_name} ${year}`,
@@ -127,11 +127,11 @@ export namespace api {
         })
       }
 
-      response.status(200).render('quater', {
+      response.status(200).render('quarter', {
         year,
-        quater,
+        quarter,
         calendars: calendars_data,
-        reports: await report.for_render.quater(year, quater),
+        reports: await report.for_render.quarter(year, quarter),
       })
     }
   }
