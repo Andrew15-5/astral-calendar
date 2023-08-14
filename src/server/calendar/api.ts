@@ -82,7 +82,7 @@ export namespace api {
         year,
         month: month_names[month],
         calendar: calendar_data,
-        reports: await report.for_render.month(year, month),
+        events: await report.for_render.month(year, month),
       })
     }
     export async function quarter(
@@ -131,7 +131,7 @@ export namespace api {
         year,
         quarter,
         calendars: calendars_data,
-        reports: await report.for_render.quarter(year, quarter),
+        events: await report.for_render.quarter(year, quarter),
       })
     }
   }

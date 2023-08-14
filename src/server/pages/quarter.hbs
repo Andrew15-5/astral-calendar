@@ -7,8 +7,8 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
     {{#> calendar_container}}
     <div class="calendars">{{#each calendars}} {{> calendar}} {{/each}}</div>
     <h3 class="report-period">Отчётность за Q{{quarter}} {{year}} г.</h3>
-    <ol class="report-list">
-      {{#each reports}} {{> report}} {{/each}}
+    <ol class="event-list">
+      {{#each events}} {{> event}} {{/each}}
     </ol>
     {{/ calendar_container}}
   </body>

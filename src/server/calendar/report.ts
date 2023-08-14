@@ -23,7 +23,7 @@ export namespace report {
      * @param year month of which year
      * @param month month's ordinal number [1;12]
      *
-     * @returns month's report data for rendering
+     * @returns month's event info list for rendering
      */
     export async function month(year: number, month: Month) {
       const month_begin = new Date(`${year}-${month}`)
@@ -44,7 +44,7 @@ export namespace report {
      * @param year quarter's year
      * @param quarter quarter's ordinal number [1;4]
      *
-     * @returns quarter's report data for rendering
+     * @returns quarter's event info list for rendering
      */
     export async function quarter(year: number, quarter: Quater) {
       const quarter_begin = new Date(`${year}-${(quarter - 1) * 3 + 1}`)
