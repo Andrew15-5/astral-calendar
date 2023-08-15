@@ -7,7 +7,7 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
     {{#> calendar_container}}
     <div class="try-horizontal-flex">
       {{> calendar calendar}}
-      <div class="right">
+      <div class="right-item">
         <h3 class="report-period">Отчётность за {{month}} {{year}} г.</h3>
         <ol class="event-list">
           {{#each events}} {{> event}} {{/each}}
@@ -15,5 +15,6 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
       </div>
     </div>
     {{/ calendar_container}}
+    <script type="text/javascript" src="/static/js/month.js"></script>
   </body>
 </html>

@@ -76,6 +76,7 @@ export namespace api {
       const month_name = month_names[month - 1]
       const calendar_data: CalendarData = {
         'show-arrows': true,
+        month: month,
         'month-year-text': `${month_name} ${year}`,
         'cell-matrix': matrix,
       }
@@ -84,7 +85,7 @@ export namespace api {
         year,
         month: month_names[month - 1],
         calendar: calendar_data,
-        events: await report.for_render.month(year, month),
+        events: await report.for_render.year(year),
       })
     }
     export async function quarter(

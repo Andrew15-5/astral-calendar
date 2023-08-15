@@ -62,5 +62,24 @@ export namespace report {
           end: format_date(event.end),
         }))
     }
+    /**
+     * @param year which year
+     *
+     * @returns year's event info list for rendering
+     */
+    export async function year(year: number) {
+      const year_begin = new Date(`${year}`)
+      const year_end = new Date(`${year + 1}`)
+      return (await get_event_info_list())
+        .filter((event) => event.end >= year_begin && event.end < year_end)
+        .map((event) => ({
+          'week-day': week_days[event.end.getDay() - 1],
+          'month-day': event.end.getDate(),
+          'deadline-month': event.end.getMonth() + 1,
+          name: event.name,
+          begin: format_date(event.begin),
+          end: format_date(event.end),
+        }))
+    }
   }
 }

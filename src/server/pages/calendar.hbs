@@ -1,15 +1,15 @@
 {{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
 https://www.gnu.org/licenses/agpl-3.0.txt --}}
-<div class="calendar">
+<div class="calendar"{{#if month}} data-month="{{month}}"{{/if}}>
   <div class="header">
     {{#if show-arrows}}
-    <img class="arrow" src="/static/images/Стрелка маленькая left.svg" />
+    <img class="arrow left" src="/static/images/Стрелка маленькая left.svg" />
     {{/if}}
     <div class="center">
       <h6 class="month-year-text">{{month-year-text}}</h6>
     </div>
     {{#if show-arrows}}
-    <img class="arrow" src="/static/images/Стрелка маленькая right.svg" />
+    <img class="arrow right" src="/static/images/Стрелка маленькая right.svg" />
     {{/if}}
   </div>
   <div class="row">
