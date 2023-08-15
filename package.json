@@ -5,7 +5,7 @@
   "scripts": {
     "dev:client": "webpack --watch",
     "dev:server": "tsnd --project ./src/server --watch ./src/server/pages --transpile-only ./src/server/index.ts",
-    "build": "tsc -b && cp -r ./src/server/pages ./build/ && sass ./src/styles/main.sass:./public/styles/main.css",
+    "build": "webpack --mode=production --node-env=production && tsc -b",
     "start": "node .",
     "prepare": "[ -x \"$(command -v husky)\" ] && [ -d .git ] && husky install || true",
     "sass": "sass --watch ./src/styles/main.sass:./public/styles/main.css"
