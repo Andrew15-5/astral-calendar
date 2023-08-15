@@ -6,7 +6,7 @@
     "dev:client": "webpack --watch",
     "dev:server": "tsnd --project ./src/server --watch ./src/server/pages --transpile-only ./src/server/index.ts",
     "build": "webpack --mode=production --node-env=production && tsc -b",
-    "start": "node .",
+    "start": "NODE_ENV=production node .",
     "prepare": "[ -x \"$(command -v husky)\" ] && [ -d .git ] && husky install || true",
     "sass": "sass --watch ./src/styles/main.sass:./public/styles/main.css"
   },

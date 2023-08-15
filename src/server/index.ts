@@ -23,6 +23,7 @@ app.use('/static/images', express.static(path.join(public_dir, 'images')))
 app.use('/static/js', express.static(path.join(public_dir, 'js')))
 
 hbs.registerPartials(pages_dir)
+hbs.registerHelper('development', () => process.env.NODE_ENV !== 'production')
 
 app.set('view engine', 'hbs')
 app.set('views', pages_dir)

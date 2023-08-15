@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackRemoveEmptyScripts = require('webpack-remove-empty-scripts');
 const FilemanagerWebpackPlugin = require('filemanager-webpack-plugin');
 
-const is_production = process.env.NODE_ENV == 'production';
+const is_production = process.env.NODE_ENV === 'production';
+const is_development = !is_production;
 
 const pages_dir_name = 'pages';
 const pages_dir = path.resolve('src', 'server', pages_dir_name);
@@ -19,6 +20,9 @@ const config = {
   entry: {
     selectors: './src/client/selectors.ts',
     main: './src/styles/main.sass',
+    ...(is_development
+      ? { live: path.join(public_dir, '.dev', 'live.js') }
+      : {}),
   },
   output: {
     path: output_dir,
@@ -35,7 +39,7 @@ const config = {
             styles_dir,
             path.join(public_dir, '*.js*'),
             path.join(public_dir, '*.css*'),
-            ...(is_production === true ? [output_dir] : []),
+            ...(is_production ? [output_dir] : []),
           ],
         },
         onEnd: [
@@ -57,7 +61,7 @@ const config = {
               path.join(output_dir, '*.css*'),
             ],
           },
-          ...(is_production === true
+          ...(is_production
             ? [
                 {
                   delete: [
