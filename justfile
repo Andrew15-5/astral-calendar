@@ -16,3 +16,8 @@ server: (run "dev:server")
 client: (run "dev:client")
 build: (run "build")
 sass: (run "sass")
+
+# Production
+alias st := start
+
+start: (run "start")
