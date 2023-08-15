@@ -1,8 +1,10 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+import { month_names } from '../i18n/default/calendar/strings'
+import { quarter_names, selector_text } from '../i18n/default/selectors/strings'
+
 import { Request, Response } from 'express'
 
-import { month_names, quarter_names, selector_text } from './i18n/ru/strings'
 import { make_url, report } from './index'
 
 const years = [2020, 2021, 2022]
