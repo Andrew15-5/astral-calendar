@@ -80,7 +80,7 @@ export namespace api {
 
       response.status(200).render('month', {
         year,
-        month: month_names[month],
+        month: month_names[month - 1],
         calendar: calendar_data,
         events: await report.for_render.month(year, month),
       })
