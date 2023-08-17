@@ -1,19 +1,9 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import update from './update'
-
-function update_calendar_and_report(
-  event_list: Element[],
-  month: Month,
-  year: number
-) {
-  update.calendar(month, year)
-  update.report(event_list, month, year)
-}
+import { get_year_and_month, update_calendar_and_report } from './utils'
 
 function month() {
-  const path = window.location.pathname
-  const regex_list = path.match(/\d+/g)
   const left_arrow = document.querySelector(
     '#calendar .calendar .header .arrow.left'
   )
@@ -24,20 +14,13 @@ function month() {
     '#calendar .event-list .event'
   )
   const event_list = Array.from(event_node_list)
+  const year_and_month = get_year_and_month()
 
-  if (
-    regex_list === null ||
-    regex_list.length < 2 ||
-    left_arrow === null ||
-    right_arrow === null
-  ) {
+  if (year_and_month === false || left_arrow === null || right_arrow === null) {
     return
   }
 
-  const [year, month_test] = regex_list.map((value) => parseInt(value))
-
-  if (month_test < 1 || month_test > 12 || isNaN(year)) return
-  let calendar_month = month_test as Month
+  let [year, calendar_month] = year_and_month
 
   update.report(event_list, calendar_month, year)
 
