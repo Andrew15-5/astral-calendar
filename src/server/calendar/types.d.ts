@@ -5,3 +5,12 @@ type CalendarData = {
   month?: number
   'week-day-names': string[]
 }
+
+type ReportDataForRender = {
+  'week-day': string
+  'month-day': number
+  'deadline-month': number
+  name: string
+  begin: string
+  end: string
+}

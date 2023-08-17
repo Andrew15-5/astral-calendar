@@ -57,10 +57,11 @@ export namespace report {
         .map((event) => ({
           'week-day': week_days[event.end.getDay() - 1],
           'month-day': event.end.getDate(),
+          'deadline-month': event.end.getMonth() + 1,
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),
-        }))
+        })) as ReportDataForRender[]
     }
     /**
      * @param year which year
@@ -79,7 +80,7 @@ export namespace report {
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),
-        }))
+        })) as ReportDataForRender[]
     }
   }
 }

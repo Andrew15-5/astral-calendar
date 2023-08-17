@@ -142,6 +142,24 @@ namespace update {
       update_report_period_for_month(report_period_text, month, year)
       update_visible_events_for_month(event_list, month)
     }
+    export function quarter(
+      report_text_list: Element[],
+      quarter: Quarter,
+      year: number
+    ) {
+      const months_in_quarter = 3
+      const first_month = (quarter - 1) * months_in_quarter + 1
+      const months: Month[] = []
+      for (let i = 0; i < months_in_quarter; i++) {
+        months.push((first_month + i) as Month)
+      }
+      for (let i = 0; i < months_in_quarter; i++) {
+        console.log(
+          'update_report_period_for_month(report_text_list[i], months[i], year)'
+        )
+        update_report_period_for_month(report_text_list[i], months[i], year)
+      }
+    }
   }
 }
 

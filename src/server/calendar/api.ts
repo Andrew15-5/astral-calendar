@@ -98,9 +98,28 @@ export namespace api {
         })
       }
 
+      const first_month = (quarter - 1) * months_in_quarter + 1
+      const months: Month[] = []
+      for (let i = 0; i < months_in_quarter; i++) {
+        months.push((first_month + i) as Month)
+      }
+
+      const events = await report.for_render.quarter(year, quarter)
+      const grouped_events: ReportDataForRender[][] = Array.from(
+        { length: 3 },
+        () => []
+      )
+      for (const event of events) {
+        for (let i = 0; i < months_in_quarter; i++) {
+          if (event['deadline-month'] === months[i]) {
+            grouped_events[i].push(event)
+          }
+        }
+      }
+
       response.status(200).render('quarter', {
         calendars: calendars_data,
-        events: await report.for_render.quarter(year, quarter),
+        grouped_events: grouped_events,
       })
     }
   }

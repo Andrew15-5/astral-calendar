@@ -6,11 +6,12 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
   <body>
     {{#> calendar_container}}
     <div class="calendars">{{#each calendars}} {{> calendar}} {{/each}}</div>
+    {{#each grouped_events}}
     <h3 class="report-period"></h3>
     <ol class="event-list">
-      {{#each events}} {{> event}} {{/each}}
+      {{#each this}} {{> event}} {{/each}}
     </ol>
-    {{/ calendar_container}}
+    {{/each}} {{/ calendar_container}}
     <script type="text/javascript" src="/static/js/quarter.js"></script>
   </body>
 </html>

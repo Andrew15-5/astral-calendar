@@ -5,10 +5,13 @@ import { get_year_and_quarter } from './utils'
 
 function quarter_top_level_function() {
   const calendars_test = document.querySelectorAll('#calendar .calendar')
+  const report_text_list = Array.from(
+    document.querySelectorAll('#calendar .report-period')
+  )
   const year_and_quarter = get_year_and_quarter()
   if (
-    calendars_test === null ||
     calendars_test.length !== 3 ||
+    report_text_list.length !== 3 ||
     year_and_quarter === false
   ) {
     return
@@ -16,6 +19,7 @@ function quarter_top_level_function() {
   const calendars = Array.from(calendars_test) as QuarterCalendarList
   const [year, quarter] = year_and_quarter
   update.calendar.quarter(calendars, quarter, year)
+  update.report.quarter(report_text_list, quarter, year)
 }
 
 quarter_top_level_function()
