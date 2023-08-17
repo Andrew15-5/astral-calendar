@@ -47,24 +47,16 @@ export namespace api {
       response.status(200).render('main', { selectors: get_selectors_data() })
     }
     export async function month(
-      request: Request<{ year: string; month: string }>,
+      request: Request<{ year: string }>,
       response: Response
     ) {
-      const { year: year_str, month: month_str } = request.params
-      const [year_test, month_test] = [year_str, month_str].map((str) =>
-        Number.parseInt(str)
-      )
+      const { year: year_str } = request.params
+      const year = Number.parseInt(year_str)
 
-      // Params' values check
-      if ([year_test, month_test].includes(NaN)) {
+      // Param's value check
+      if (isNaN(year)) {
         return response.redirect(make_url.no_params.main())
       }
-      if (month_test < 1) {
-        return response.redirect(make_url.month(year_test, 1))
-      } else if (month_test > 12) {
-        return response.redirect(make_url.month(year_test, 12))
-      }
-      const [year, month] = [year_test, month_test as Month]
 
       const calendar_data: CalendarData = {
         'show-arrows': true,
