@@ -3,38 +3,37 @@
 import update from './update'
 import { get_year_and_month, update_calendar_and_report } from './utils'
 
-function month() {
+function month_top_level_function() {
   const left_arrow = document.querySelector(
     '#calendar .calendar .header .arrow.left'
   )
   const right_arrow = document.querySelector(
     '#calendar .calendar .header .arrow.right'
   )
-  const event_node_list = document.querySelectorAll(
-    '#calendar .event-list .event'
+  const event_list = Array.from(
+    document.querySelectorAll('#calendar .event-list .event')
   )
-  const event_list = Array.from(event_node_list)
   const year_and_month = get_year_and_month()
 
   if (year_and_month === false || left_arrow === null || right_arrow === null) {
     return
   }
 
-  let [year, calendar_month] = year_and_month
+  let [year, month] = year_and_month
 
-  update.report(event_list, calendar_month, year)
+  update.report(event_list, month, year)
 
   left_arrow.addEventListener('click', () => {
-    if (calendar_month === 1) return
-    calendar_month = (calendar_month - 1) as Month
-    update_calendar_and_report(event_list, calendar_month, year)
+    if (month === 1) return
+    month = (month - 1) as Month
+    update_calendar_and_report(event_list, month, year)
   })
 
   right_arrow.addEventListener('click', () => {
-    if (calendar_month === 12) return
-    calendar_month = (calendar_month + 1) as Month
-    update_calendar_and_report(event_list, calendar_month, year)
+    if (month === 12) return
+    month = (month + 1) as Month
+    update_calendar_and_report(event_list, month, year)
   })
 }
 
-month()
+month_top_level_function()
