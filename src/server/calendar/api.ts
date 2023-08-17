@@ -73,11 +73,9 @@ export namespace api {
       while (cells.length > 0) {
         matrix.push(cells.splice(0, row_length))
       }
-      const month_name = month_names[month - 1]
       const calendar_data: CalendarData = {
         'show-arrows': true,
         month: month,
-        'month-year-text': `${month_name} ${year}`,
         'week-day-names': week_days,
         'cell-matrix': matrix,
       }
@@ -122,11 +120,11 @@ export namespace api {
       for (let i = first_month_index; i <= last_month_index; i++) {
         quarter_month_names.push(month_names[i])
       }
+      const months_in_quarter = 3
       const calendars_data: CalendarData[] = []
-      for (const month_name of quarter_month_names) {
+      for (let i = 0; i < months_in_quarter; i++) {
         calendars_data.push({
           'show-arrows': false,
-          'month-year-text': `${month_name} ${year}`,
           'week-day-names': week_days,
           'cell-matrix': matrix,
         })

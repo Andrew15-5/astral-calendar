@@ -3,7 +3,6 @@
 type CalendarData = {
   'show-arrows': boolean
   month?: number
-  'month-year-text': string
   'week-day-names': string[]
   'cell-matrix': number[][]
 }
