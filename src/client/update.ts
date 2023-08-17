@@ -108,6 +108,16 @@ function update_visible_events_for_month(event_list: Element[], month: Month) {
   hide(other_months_event_list)
 }
 
+function get_month_list_for_quarter(quarter: Quarter) {
+  const months_in_quarter = 3
+  const first_month = (quarter - 1) * months_in_quarter + 1
+  const months: Month[] = []
+  for (let i = 0; i < months_in_quarter; i++) {
+    months.push((first_month + i) as Month)
+  }
+  return months
+}
+
 namespace update {
   export namespace calendar {
     export function month(calendar: Element, month: Month, year: number) {
@@ -121,11 +131,7 @@ namespace update {
       year: number
     ) {
       const months_in_quarter = 3
-      const first_month = (quarter - 1) * months_in_quarter + 1
-      const months: Month[] = []
-      for (let i = 0; i < months_in_quarter; i++) {
-        months.push((first_month + i) as Month)
-      }
+      const months = get_month_list_for_quarter(quarter)
       for (let i = 0; i < months_in_quarter; i++) {
         update_calendar_text(calendars[i], months[i], year)
         update_calendar_days(calendars[i], months[i], year)
@@ -148,11 +154,7 @@ namespace update {
       year: number
     ) {
       const months_in_quarter = 3
-      const first_month = (quarter - 1) * months_in_quarter + 1
-      const months: Month[] = []
-      for (let i = 0; i < months_in_quarter; i++) {
-        months.push((first_month + i) as Month)
-      }
+      const months = get_month_list_for_quarter(quarter)
       for (let i = 0; i < months_in_quarter; i++) {
         console.log(
           'update_report_period_for_month(report_text_list[i], months[i], year)'
