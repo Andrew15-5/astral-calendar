@@ -77,10 +77,14 @@ function update_calendar_days(calendar: Element, month: Month, year: number) {
   })
 }
 
-function update_report_period_for_month(month: Month, year: number) {
-  const text = document.querySelector('#calendar .report-period')
-  if (text === null) return
-  text.innerHTML = `Отчётность за ${month_names[month - 1]} ${year} г.`
+function update_report_period_for_month(
+  report_period_text: Element,
+  month: Month,
+  year: number
+) {
+  report_period_text.innerHTML = `Отчётность за ${
+    month_names[month - 1]
+  } ${year} г.`
 }
 
 function hide(li_list: Element[]) {
@@ -129,8 +133,13 @@ namespace update {
     }
   }
   export namespace report {
-    export function month(event_list: Element[], month: Month, year: number) {
-      update_report_period_for_month(month, year)
+    export function month(
+      report_period_text: Element,
+      event_list: Element[],
+      month: Month,
+      year: number
+    ) {
+      update_report_period_for_month(report_period_text, month, year)
       update_visible_events_for_month(event_list, month)
     }
   }

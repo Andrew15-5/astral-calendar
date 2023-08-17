@@ -4,18 +4,20 @@ import update from './update'
 import { get_year_and_month } from './utils'
 
 export function update_calendar_and_report(
+  report_text: Element,
   calendar: Element,
   event_list: Element[],
   month: Month,
   year: number
 ) {
   update.calendar.month(calendar, month, year)
-  update.report.month(event_list, month, year)
+  update.report.month(report_text, event_list, month, year)
 }
 
 function month_top_level_function() {
   const calendar = document.querySelector('#calendar .calendar')
-  if (calendar === null) return
+  const report_text = document.querySelector('#calendar .report-period')
+  if (calendar === null || report_text === null) return
 
   const left_arrow = calendar.querySelector('.header .arrow.left')
   const right_arrow = calendar.querySelector('.header .arrow.right')
@@ -30,18 +32,18 @@ function month_top_level_function() {
 
   let [year, month] = year_and_month
 
-  update_calendar_and_report(calendar, event_list, month, year)
+  update_calendar_and_report(report_text, calendar, event_list, month, year)
 
   left_arrow.addEventListener('click', () => {
     if (month === 1) return
     month = (month - 1) as Month
-    update_calendar_and_report(calendar, event_list, month, year)
+    update_calendar_and_report(report_text, calendar, event_list, month, year)
   })
 
   right_arrow.addEventListener('click', () => {
     if (month === 12) return
     month = (month + 1) as Month
-    update_calendar_and_report(calendar, event_list, month, year)
+    update_calendar_and_report(report_text, calendar, event_list, month, year)
   })
 }
 
