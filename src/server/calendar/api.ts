@@ -107,7 +107,7 @@ export namespace api {
       } else if (quarter_test > 4) {
         return response.redirect(make_url.quarter(year_test, 4))
       }
-      const [year, quarter] = [year_test, quarter_test as Quater]
+      const [year, quarter] = [year_test, quarter_test as Quarter]
 
       // Making calendars_data
       const cells = Array.from({ length: 6 * 7 }, (_, i) => (i % 31) + 1)

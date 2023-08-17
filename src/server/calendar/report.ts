@@ -45,7 +45,7 @@ export namespace report {
      *
      * @returns quarter's event info list for rendering
      */
-    export async function quarter(year: number, quarter: Quater) {
+    export async function quarter(year: number, quarter: Quarter) {
       const quarter_begin = new Date(`${year}-${(quarter - 1) * 3 + 1}`)
       const quarter_end = new Date(
         quarter < 4 ? `${year}-${quarter * 3 + 1}` : `${year + 1}-${1}`
