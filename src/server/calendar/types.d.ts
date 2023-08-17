@@ -4,5 +4,4 @@ type CalendarData = {
   'show-arrows': boolean
   month?: number
   'week-day-names': string[]
-  'cell-matrix': number[][]
 }

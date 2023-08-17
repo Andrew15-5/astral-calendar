@@ -17,11 +17,11 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
     <h6 class="cell">{{this}}</h6>
     {{/each}}
   </div>
-  {{#each cell-matrix}}
+  {{#clone 6}}
   <div class="row with-digits">
-    {{#each this}}
-    <h6 class="cell">{{this}}</h6>
-    {{/each}}
+    {{#clone 7}}
+    <h6 class="cell"></h6>
+    {{/clone}}
   </div>
-  {{/each}}
+  {{/clone}}
 </div>

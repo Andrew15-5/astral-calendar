@@ -66,17 +66,9 @@ export namespace api {
       }
       const [year, month] = [year_test, month_test as Month]
 
-      // Making calendar_data
-      const cells = Array.from({ length: 6 * 7 }, (_, i) => (i % 31) + 1)
-      const matrix = []
-      const row_length = 7
-      while (cells.length > 0) {
-        matrix.push(cells.splice(0, row_length))
-      }
       const calendar_data: CalendarData = {
         'show-arrows': true,
         'week-day-names': week_days,
-        'cell-matrix': matrix,
       }
 
       response.status(200).render('month', {
@@ -107,25 +99,12 @@ export namespace api {
       const [year, quarter] = [year_test, quarter_test as Quarter]
 
       // Making calendars_data
-      const cells = Array.from({ length: 6 * 7 }, (_, i) => (i % 31) + 1)
-      const matrix = []
-      const row_length = 7
-      while (cells.length > 0) {
-        matrix.push(cells.splice(0, row_length))
-      }
-      const first_month_index = (quarter - 1) * 3
-      const last_month_index = first_month_index + 2
-      const quarter_month_names = []
-      for (let i = first_month_index; i <= last_month_index; i++) {
-        quarter_month_names.push(month_names[i])
-      }
       const months_in_quarter = 3
       const calendars_data: CalendarData[] = []
       for (let i = 0; i < months_in_quarter; i++) {
         calendars_data.push({
           'show-arrows': false,
           'week-day-names': week_days,
-          'cell-matrix': matrix,
         })
       }
 

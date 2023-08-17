@@ -24,6 +24,11 @@ app.use('/static/js', express.static(path.join(public_dir, 'js')))
 
 hbs.registerPartials(pages_dir)
 hbs.registerHelper('development', () => process.env.NODE_ENV !== 'production')
+hbs.registerHelper('clone', (times, block) => {
+  let ret = ''
+  for (let i = 0; i < times; i++) ret += block.fn()
+  return ret
+})
 
 app.set('view engine', 'hbs')
 app.set('views', pages_dir)
