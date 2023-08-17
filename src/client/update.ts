@@ -2,19 +2,15 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { month_names } from './i18n/default/calendar/strings'
 
-function update_calendar_text(month: Month, year: number) {
-  const text = document.querySelector(
-    '#calendar .calendar .header .month-year-text'
-  )
+function update_calendar_text(calendar: Element, month: Month, year: number) {
+  const text = calendar.querySelector('.header .month-year-text')
   if (text === null) return
   text.innerHTML = `${month_names[month - 1]} ${year}`
 }
 
-function update_calendar_days(month: Month, year: number) {
+function update_calendar_days(calendar: Element, month: Month, year: number) {
   const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
-  const day_rows = document.querySelectorAll(
-    '#calendar .calendar .row.with-digits'
-  ) // 6 rows/weeks
+  const day_rows = calendar.querySelectorAll('.row.with-digits') // 6 rows/weeks
 
   if (day_rows.length !== 6) return
 
@@ -53,7 +49,7 @@ function update_calendar_days(month: Month, year: number) {
   })
 }
 
-function update_report_period(month: Month, year: number) {
+function update_report_period_for_month(month: Month, year: number) {
   const text = document.querySelector('#calendar .report-period')
   if (text === null) return
   text.innerHTML = `Отчётность за ${month_names[month - 1]} ${year} г.`
@@ -67,7 +63,7 @@ function show(li_list: Element[]) {
   li_list.forEach((li) => li.classList.remove('hide'))
 }
 
-function update_visible_events(event_list: Element[], month: Month) {
+function update_visible_events_for_month(event_list: Element[], month: Month) {
   const month_event_list = event_list.filter((li) => {
     const event_month = li.getAttribute('data-deadline-month')
     if (event_month === null) return false
@@ -81,13 +77,17 @@ function update_visible_events(event_list: Element[], month: Month) {
 }
 
 namespace update {
-  export function calendar(month: Month, year: number) {
-    update_calendar_text(month, year)
-    update_calendar_days(month, year)
+  export namespace calendar {
+    export function month(calendar: Element, month: Month, year: number) {
+      update_calendar_text(calendar, month, year)
+      update_calendar_days(calendar, month, year)
+    }
   }
-  export function report(event_list: Element[], month: Month, year: number) {
-    update_report_period(month, year)
-    update_visible_events(event_list, month)
+  export namespace report {
+    export function month(event_list: Element[], month: Month, year: number) {
+      update_report_period_for_month(month, year)
+      update_visible_events_for_month(event_list, month)
+    }
   }
 }
 
