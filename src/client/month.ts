@@ -30,7 +30,7 @@ function month_top_level_function() {
 
   let [year, month] = year_and_month
 
-  update.report.month(event_list, month, year)
+  update_calendar_and_report(calendar, event_list, month, year)
 
   left_arrow.addEventListener('click', () => {
     if (month === 1) return
