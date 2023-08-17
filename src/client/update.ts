@@ -88,10 +88,11 @@ namespace update {
       year: number
     ) {
       const months_in_quarter = 3
-      const months = Array.from(
-        { length: months_in_quarter },
-        (_, i) => ((quarter - 1) * months_in_quarter + 1 + i) as Month
-      )
+      const first_month = (quarter - 1) * months_in_quarter + 1
+      const months: Month[] = []
+      for (let i = 0; i < months_in_quarter; i++) {
+        months.push((first_month + i) as Month)
+      }
       for (let i = 0; i < months_in_quarter; i++) {
         update_calendar_text(calendars[i], months[i], year)
         update_calendar_days(calendars[i], months[i], year)
