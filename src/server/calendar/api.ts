@@ -72,8 +72,6 @@ export namespace api {
       }
 
       response.status(200).render('month', {
-        year,
-        month: month_names[month - 1],
         calendar: calendar_data,
         events: await report.for_render.year(year),
       })
@@ -109,8 +107,6 @@ export namespace api {
       }
 
       response.status(200).render('quarter', {
-        year,
-        quarter,
         calendars: calendars_data,
         events: await report.for_render.quarter(year, quarter),
       })
