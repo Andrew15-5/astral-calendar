@@ -4,7 +4,6 @@ import update from './update'
 
 function month() {
   const path = window.location.pathname
-  console.log(path)
   const regex_list = path.match(/\d+/g)
   const left_arrow = document.querySelector(
     '#calendar .calendar .header .arrow.left'
@@ -16,8 +15,6 @@ function month() {
     '#calendar .event-list .event'
   )
   const event_list = Array.from(event_node_list)
-
-  console.log('regex_list:', regex_list)
 
   if (
     regex_list === null ||
@@ -33,29 +30,21 @@ function month() {
   if (month_test < 1 || month_test > 12 || isNaN(year)) return
   let calendar_month = month_test as Month
 
-  console.log('Current month:', calendar_month)
-
   update.report(event_list, calendar_month, year)
 
   left_arrow.addEventListener('click', () => {
-    console.log('click')
     if (calendar_month === 1) return
     calendar_month = (calendar_month - 1) as Month
-    console.log('previous month', calendar_month)
     update.calendar(calendar_month, year)
     update.report(event_list, calendar_month, year)
   })
 
   right_arrow.addEventListener('click', () => {
-    console.log('click')
     if (calendar_month === 12) return
     calendar_month = (calendar_month + 1) as Month
-    console.log('next month', calendar_month)
     update.calendar(calendar_month, year)
     update.report(event_list, calendar_month, year)
   })
-
-  // console.log(other_months_event_list)
 }
 
 month()
