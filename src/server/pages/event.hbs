@@ -1,9 +1,11 @@
 {{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
 https://www.gnu.org/licenses/agpl-3.0.txt --}}
 <li class="event"{{#if deadline-month}} data-deadline-month="{{deadline-month}}"{{/if}}>
-  <span class="deadline"
-    >{{week-day}}&nbsp;<span class="day-number">{{month-day}}</span></span
-  >
+  <div class="deadline-wrapper">
+    <span class="deadline"
+      >{{week-day}}&nbsp;<span class="day-number">{{month-day}}</span></span
+    >
+  </div>
   <div>
     <div class="name">{{name}}</div>
     <div class="period">Срок сдачи: {{begin}} - {{end}}</div>
