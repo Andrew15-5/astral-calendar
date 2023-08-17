@@ -13,13 +13,9 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
     {{/if}}
   </div>
   <div class="row">
-    <h6 class="cell">Пн</h6>
-    <h6 class="cell">Вт</h6>
-    <h6 class="cell">Ср</h6>
-    <h6 class="cell">Чт</h6>
-    <h6 class="cell">Пт</h6>
-    <h6 class="cell">Сб</h6>
-    <h6 class="cell">Вс</h6>
+    {{#each week-day-names}}
+    <h6 class="cell">{{this}}</h6>
+    {{/each}}
   </div>
   {{#each cell-matrix}}
   <div class="row with-digits">

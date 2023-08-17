@@ -1,6 +1,6 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
-import { month_names } from '../i18n/default/calendar/strings'
+import { month_names, week_days } from '../i18n/default/calendar/strings'
 import { quarter_names, selector_text } from '../i18n/default/selectors/strings'
 
 import { Request, Response } from 'express'
@@ -78,6 +78,7 @@ export namespace api {
         'show-arrows': true,
         month: month,
         'month-year-text': `${month_name} ${year}`,
+        'week-day-names': week_days,
         'cell-matrix': matrix,
       }
 
@@ -126,6 +127,7 @@ export namespace api {
         calendars_data.push({
           'show-arrows': false,
           'month-year-text': `${month_name} ${year}`,
+          'week-day-names': week_days,
           'cell-matrix': matrix,
         })
       }
