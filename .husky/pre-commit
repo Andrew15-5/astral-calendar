@@ -2,3 +2,11 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 ./node_modules/.bin/pretty-quick --staged
+
+if files=$(grep -rL Copyright src | grep -vi .json); then
+  echo
+  echo Add copyright notice to next files:
+  echo "$files"
+  echo
+  exit 1
+fi
