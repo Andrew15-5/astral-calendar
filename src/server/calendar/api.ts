@@ -109,7 +109,7 @@ export namespace api {
       const [year, quarter] = [year_test, quarter_test as Quater]
 
       // Making calendars_data
-      const cells = Array.from({ length: 35 }, (_, i) => (i % 31) + 1)
+      const cells = Array.from({ length: 6 * 7 }, (_, i) => (i % 31) + 1)
       const matrix = []
       const row_length = 7
       while (cells.length > 0) {
