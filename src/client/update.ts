@@ -8,6 +8,34 @@ function update_calendar_text(calendar: Element, month: Month, year: number) {
   text.innerHTML = `${month_names[month - 1]} ${year}`
 }
 
+function hide_arrow(arrow: Element) {
+  arrow.classList.add('transparent')
+}
+
+function show_arrow(arrow: Element) {
+  arrow.classList.remove('transparent')
+}
+
+function update_calendar_arrows(calendar: Element, month: Month) {
+  const left_arrow = calendar.querySelector('.header .arrow.left')
+  const right_arrow = calendar.querySelector('.header .arrow.right')
+  if (left_arrow === null || right_arrow === null) return
+  switch (month) {
+    case 1:
+      hide_arrow(left_arrow)
+      break
+    case 2:
+      show_arrow(left_arrow)
+      break
+    case 11:
+      show_arrow(right_arrow)
+      break
+    case 12:
+      hide_arrow(right_arrow)
+      break
+  }
+}
+
 function update_calendar_days(calendar: Element, month: Month, year: number) {
   const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
   const day_rows = calendar.querySelectorAll('.row.with-digits') // 6 rows/weeks
@@ -79,6 +107,7 @@ function update_visible_events_for_month(event_list: Element[], month: Month) {
 namespace update {
   export namespace calendar {
     export function month(calendar: Element, month: Month, year: number) {
+      update_calendar_arrows(calendar, month)
       update_calendar_text(calendar, month, year)
       update_calendar_days(calendar, month, year)
     }
