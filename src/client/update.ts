@@ -156,9 +156,6 @@ namespace update {
       const months_in_quarter = 3
       const months = get_month_list_for_quarter(quarter)
       for (let i = 0; i < months_in_quarter; i++) {
-        console.log(
-          'update_report_period_for_month(report_text_list[i], months[i], year)'
-        )
         update_report_period_for_month(report_text_list[i], months[i], year)
       }
     }
