@@ -10,12 +10,60 @@ function show(li_list: Element[]) {
   li_list.forEach((li) => li.classList.remove('hide'))
 }
 
-function update_calendar(month: Month, year: number) {
+function update_calendar_text(month: Month, year: number) {
   const text = document.querySelector(
     '#calendar .calendar .header .month-year-text'
   )
   if (text === null) return
   text.innerHTML = `${month_names[month - 1]} ${year}`
+}
+
+function update_calendar_days(month: Month, year: number) {
+  const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
+  const day_rows = document.querySelectorAll(
+    '#calendar .calendar .row.with-digits'
+  ) // 6 rows/weeks
+
+  if (day_rows.length !== 6) return
+
+  const day_elements = Array.from(day_rows)
+    .map((row) => Array.from(row.querySelectorAll('.cell')))
+    .flat()
+
+  if (day_elements.length !== total_days_on_calendar) return
+
+  const start_of_the_month = new Date(`${year}-${month}`)
+  let first_week_day = start_of_the_month.getDay()
+  if (first_week_day === 0) first_week_day = 7 // [Sunday;Saturday] -> [0;6]
+
+  // 0 days if current month starts from Monday.
+  const days_from_previous_month = first_week_day === 1 ? 0 : first_week_day - 1
+
+  // 0th day changes to the last day of the previous month (month is 0-based).
+  const days_in_current_month = new Date(year, month, 0).getDate()
+  const days_in_previous_month = new Date(year, month - 1, 0).getDate()
+
+  day_elements.forEach((day_element, i) => {
+    let day_number = i + 1
+    if (day_number <= days_from_previous_month) {
+      // Offset for days in previous month
+      day_number =
+        days_in_previous_month - days_from_previous_month + day_number
+    } else {
+      // Offset 1st day for days in current month
+      day_number -= days_from_previous_month
+      if (day_number > days_in_current_month) {
+        // Offset 1st day again for days in next month
+        day_number -= days_in_current_month
+      }
+    }
+    day_element.innerHTML = day_number.toString()
+  })
+}
+
+function update_calendar(month: Month, year: number) {
+  update_calendar_text(month, year)
+  update_calendar_days(month, year)
 }
 
 function update_report_period(month: Month, year: number) {
