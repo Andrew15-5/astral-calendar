@@ -75,7 +75,6 @@ export namespace api {
       }
       const calendar_data: CalendarData = {
         'show-arrows': true,
-        month: month,
         'week-day-names': week_days,
         'cell-matrix': matrix,
       }

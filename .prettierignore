@@ -1,3 +1,2 @@
 # https://github.com/prettier/prettier/issues/15250
-src/server/pages/calendar.hbs
 src/server/pages/event.hbs
