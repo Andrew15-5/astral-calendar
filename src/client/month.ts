@@ -2,6 +2,15 @@
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import update from './update'
 
+function update_calendar_and_report(
+  event_list: Element[],
+  month: Month,
+  year: number
+) {
+  update.calendar(month, year)
+  update.report(event_list, month, year)
+}
+
 function month() {
   const path = window.location.pathname
   const regex_list = path.match(/\d+/g)
@@ -35,15 +44,13 @@ function month() {
   left_arrow.addEventListener('click', () => {
     if (calendar_month === 1) return
     calendar_month = (calendar_month - 1) as Month
-    update.calendar(calendar_month, year)
-    update.report(event_list, calendar_month, year)
+    update_calendar_and_report(event_list, calendar_month, year)
   })
 
   right_arrow.addEventListener('click', () => {
     if (calendar_month === 12) return
     calendar_month = (calendar_month + 1) as Month
-    update.calendar(calendar_month, year)
-    update.report(event_list, calendar_month, year)
+    update_calendar_and_report(event_list, calendar_month, year)
   })
 }
 
