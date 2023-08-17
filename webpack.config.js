@@ -20,6 +20,7 @@ const config = {
   entry: {
     selectors: './src/client/selectors.ts',
     month: './src/client/month.ts',
+    quarter: './src/client/quarter.ts',
     main: './src/styles/main.sass',
     ...(is_development
       ? { live: path.join(public_dir, '.dev', 'live.js') }

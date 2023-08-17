@@ -1,12 +1,12 @@
 {{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
 https://www.gnu.org/licenses/agpl-3.0.txt --}}
-<div class="calendar"{{#if month}} data-month="{{month}}"{{/if}}>
+<div class="calendar">
   <div class="header">
     {{#if show-arrows}}
     <img class="arrow left" src="/static/images/Стрелка маленькая left.svg" />
     {{/if}}
     <div class="center">
-      <h6 class="month-year-text">{{month-year-text}}</h6>
+      <h6 class="month-year-text"></h6>
     </div>
     {{#if show-arrows}}
     <img class="arrow right" src="/static/images/Стрелка маленькая right.svg" />
@@ -17,11 +17,11 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
     <h6 class="cell">{{this}}</h6>
     {{/each}}
   </div>
-  {{#each cell-matrix}}
+  {{#clone 6}}
   <div class="row with-digits">
-    {{#each this}}
-    <h6 class="cell">{{this}}</h6>
-    {{/each}}
+    {{#clone 7}}
+    <h6 class="cell"></h6>
+    {{/clone}}
   </div>
-  {{/each}}
+  {{/clone}}
 </div>

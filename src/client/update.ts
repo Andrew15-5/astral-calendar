@@ -82,6 +82,22 @@ namespace update {
       update_calendar_text(calendar, month, year)
       update_calendar_days(calendar, month, year)
     }
+    export function quarter(
+      calendars: QuarterCalendarList,
+      quarter: Quarter,
+      year: number
+    ) {
+      const months_in_quarter = 3
+      const first_month = (quarter - 1) * months_in_quarter + 1
+      const months: Month[] = []
+      for (let i = 0; i < months_in_quarter; i++) {
+        months.push((first_month + i) as Month)
+      }
+      for (let i = 0; i < months_in_quarter; i++) {
+        update_calendar_text(calendars[i], months[i], year)
+        update_calendar_days(calendars[i], months[i], year)
+      }
+    }
   }
   export namespace report {
     export function month(event_list: Element[], month: Month, year: number) {

@@ -47,44 +47,23 @@ export namespace api {
       response.status(200).render('main', { selectors: get_selectors_data() })
     }
     export async function month(
-      request: Request<{ year: string; month: string }>,
+      request: Request<{ year: string }>,
       response: Response
     ) {
-      const { year: year_str, month: month_str } = request.params
-      const [year_test, month_test] = [year_str, month_str].map((str) =>
-        Number.parseInt(str)
-      )
+      const { year: year_str } = request.params
+      const year = Number.parseInt(year_str)
 
-      // Params' values check
-      if ([year_test, month_test].includes(NaN)) {
+      // Param's value check
+      if (isNaN(year)) {
         return response.redirect(make_url.no_params.main())
       }
-      if (month_test < 1) {
-        return response.redirect(make_url.month(year_test, 1))
-      } else if (month_test > 12) {
-        return response.redirect(make_url.month(year_test, 12))
-      }
-      const [year, month] = [year_test, month_test as Month]
 
-      // Making calendar_data
-      const cells = Array.from({ length: 6 * 7 }, (_, i) => (i % 31) + 1)
-      const matrix = []
-      const row_length = 7
-      while (cells.length > 0) {
-        matrix.push(cells.splice(0, row_length))
-      }
-      const month_name = month_names[month - 1]
       const calendar_data: CalendarData = {
         'show-arrows': true,
-        month: month,
-        'month-year-text': `${month_name} ${year}`,
         'week-day-names': week_days,
-        'cell-matrix': matrix,
       }
 
       response.status(200).render('month', {
-        year,
-        month: month_names[month - 1],
         calendar: calendar_data,
         events: await report.for_render.year(year),
       })
@@ -110,31 +89,16 @@ export namespace api {
       const [year, quarter] = [year_test, quarter_test as Quarter]
 
       // Making calendars_data
-      const cells = Array.from({ length: 6 * 7 }, (_, i) => (i % 31) + 1)
-      const matrix = []
-      const row_length = 7
-      while (cells.length > 0) {
-        matrix.push(cells.splice(0, row_length))
-      }
-      const first_month_index = (quarter - 1) * 3
-      const last_month_index = first_month_index + 2
-      const quarter_month_names = []
-      for (let i = first_month_index; i <= last_month_index; i++) {
-        quarter_month_names.push(month_names[i])
-      }
+      const months_in_quarter = 3
       const calendars_data: CalendarData[] = []
-      for (const month_name of quarter_month_names) {
+      for (let i = 0; i < months_in_quarter; i++) {
         calendars_data.push({
           'show-arrows': false,
-          'month-year-text': `${month_name} ${year}`,
           'week-day-names': week_days,
-          'cell-matrix': matrix,
         })
       }
 
       response.status(200).render('quarter', {
-        year,
-        quarter,
         calendars: calendars_data,
         events: await report.for_render.quarter(year, quarter),
       })
