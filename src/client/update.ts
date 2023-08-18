@@ -152,6 +152,9 @@ function get_month_list_for_quarter(quarter: Quarter) {
   return months
 }
 
+/**
+ * Updates calendar/report data on month/quarter page.
+ */
 namespace update {
   export namespace calendar {
     export function month(
