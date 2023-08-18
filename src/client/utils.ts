@@ -21,3 +21,20 @@ export function get_year_and_quarter() {
 
   return [year, quarter_test] as [number, Quarter]
 }
+
+export function get_day_elements(
+  calendar: Element,
+  which_layer: '.cell' | '.cell-wrapper'
+) {
+  const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
+  const day_rows = calendar.querySelectorAll('.row.with-digits') // 6 rows/weeks
+
+  if (day_rows.length !== 6) return null
+
+  const day_elements = Array.from(day_rows)
+    .map((row) => Array.from(row.querySelectorAll(which_layer)))
+    .flat()
+
+  if (day_elements.length !== total_days_on_calendar) return null
+  return day_elements
+}

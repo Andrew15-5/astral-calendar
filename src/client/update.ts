@@ -1,6 +1,7 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { month_names } from './i18n/default/calendar/strings'
+import { get_day_elements } from './utils'
 
 function update_calendar_text(calendar: Element, month: Month, year: number) {
   const text = calendar.querySelector('.header .month-year-text')
@@ -34,16 +35,8 @@ function update_calendar_arrows(calendar: Element, month: Month) {
 }
 
 function update_calendar_days(calendar: Element, month: Month, year: number) {
-  const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
-  const day_rows = calendar.querySelectorAll('.row.with-digits') // 6 rows/weeks
-
-  if (day_rows.length !== 6) return
-
-  const day_elements = Array.from(day_rows)
-    .map((row) => Array.from(row.querySelectorAll('.cell')))
-    .flat()
-
-  if (day_elements.length !== total_days_on_calendar) return
+  const day_elements = get_day_elements(calendar, '.cell')
+  if (day_elements === null) return
 
   const start_of_the_month = new Date(`${year}-${month}`)
   let first_week_day = start_of_the_month.getDay()
@@ -80,16 +73,8 @@ function update_calendar_deadlines(
   month: Month,
   year: number
 ) {
-  const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
-  const day_rows = calendar.querySelectorAll('.row.with-digits') // 6 rows/weeks
-
-  if (day_rows.length !== 6) return
-
-  const day_elements = Array.from(day_rows)
-    .map((row) => Array.from(row.querySelectorAll('.cell-wrapper')))
-    .flat()
-
-  if (day_elements.length !== total_days_on_calendar) return
+  const day_elements = get_day_elements(calendar, '.cell-wrapper')
+  if (day_elements === null) return
 
   const start_of_the_month = new Date(`${year}-${month}`)
   let first_week_day = start_of_the_month.getDay()
