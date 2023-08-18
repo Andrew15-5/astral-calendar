@@ -42,6 +42,7 @@ export namespace report {
           end: format_date(event.end),
         }))
     }
+
     /**
      * @param year quarter's year
      * @param quarter quarter's ordinal number [1;4]
@@ -70,6 +71,7 @@ export namespace report {
           end: format_date(event.end),
         }))
     }
+
     /**
      * @param year which year
      *
