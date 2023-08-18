@@ -11,11 +11,17 @@ export namespace make_url {
     export function quarter() {
       return make_url.quarter(':year', ':quarter')
     }
+    export function year() {
+      return make_url.year(':year')
+    }
   }
   export function month(year: number | string, month: number | string) {
     return `${no_params.main()}/${year}/month/${month}`
   }
   export function quarter(year: number | string, quarter: number | string) {
     return `${no_params.main()}/${year}/quarter/${quarter}`
+  }
+  export function year(year: number | string) {
+    return `${no_params.main()}/${year}`
   }
 }
