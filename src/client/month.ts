@@ -10,7 +10,7 @@ export function update_calendar_and_report(
   month: Month,
   year: number
 ) {
-  update.calendar.month(calendar, month, year)
+  update.calendar.month(event_list, calendar, month, year)
   update.report.month(report_text, event_list, month, year)
 }
 
