@@ -8,18 +8,15 @@ function update_calendar_text(calendar: Element, month: Month, year: number) {
   text.innerHTML = `${month_names[month - 1]} ${year}`
 }
 
-function hide_arrow(arrow: Element) {
-  arrow.classList.add('transparent')
-}
-
-function show_arrow(arrow: Element) {
-  arrow.classList.remove('transparent')
-}
-
 function update_calendar_arrows(calendar: Element, month: Month) {
   const left_arrow = calendar.querySelector('.header .arrow.left')
   const right_arrow = calendar.querySelector('.header .arrow.right')
   if (left_arrow === null || right_arrow === null) return
+
+  const class_name = 'transparent'
+  const hide_arrow = (arrow: Element) => arrow.classList.add(class_name)
+  const show_arrow = (arrow: Element) => arrow.classList.remove(class_name)
+
   switch (month) {
     case 1:
       hide_arrow(left_arrow)
