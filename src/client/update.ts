@@ -126,7 +126,7 @@ namespace update {
       update_calendar_days(calendar, month, year)
     }
     export function quarter(
-      calendars: QuarterCalendarList,
+      calendars: Element[],
       quarter: Quarter,
       year: number
     ) {

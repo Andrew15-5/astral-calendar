@@ -16,7 +16,7 @@ function quarter_top_level_function() {
   ) {
     return
   }
-  const calendars = Array.from(calendars_test) as QuarterCalendarList
+  const calendars = Array.from(calendars_test)
   const [year, quarter] = year_and_quarter
   update.calendar.quarter(calendars, quarter, year)
   update.report.quarter(report_text_list, quarter, year)
