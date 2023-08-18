@@ -86,16 +86,26 @@ function update_calendar_deadlines(
   // 0th day changes to the last day of the previous month (month is 0-based).
   const days_in_current_month = new Date(year, month, 0).getDate()
 
-  day_elements.forEach((day_element) =>
-    day_element.classList.remove('deadline')
-  )
+  function remove_all_event_listeners(element: Element) {
+    var new_element = element.cloneNode(true)
+    element.parentNode!.replaceChild(new_element, element)
+    return new_element as Element
+  }
+
+  // Reset everything before applying new changes to elements
+  for (const i in day_elements) {
+    day_elements[i].classList.remove('deadline')
+    day_elements[i] = remove_all_event_listeners(day_elements[i])
+  }
 
   // 1. Extract month & day info from event elements
+  // and save event element itself
   // 2. Leave only info with current month
   const event_deadline_info_list = event_list
     .map((event) => {
       return {
         // name: event.querySelector('.name')!,
+        element: event,
         month: parseInt(event.getAttribute('data-deadline-month')!) as Month,
         day: parseInt(event.getAttribute('data-deadline-day')!),
       }
@@ -114,6 +124,9 @@ function update_calendar_deadlines(
     )
     if (found) {
       day_elements[index].classList.add('deadline')
+      day_elements[index].addEventListener('click', () =>
+        found.element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      )
     }
   }
 }
