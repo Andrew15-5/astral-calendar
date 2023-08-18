@@ -27,7 +27,7 @@ export namespace report {
      *
      * @returns year's event info list for rendering
      */
-    export async function month(year: number) {
+    export async function month(year: number): Promise<ReportDataForRender[]> {
       const year_begin = new Date(`${year}`)
       const year_end = new Date(`${year + 1}`)
       return (await get_event_info_list())
@@ -39,7 +39,7 @@ export namespace report {
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),
-        })) as ReportDataForRender[]
+        }))
     }
     /**
      * @param year quarter's year
@@ -47,7 +47,10 @@ export namespace report {
      *
      * @returns quarter's event info list for rendering
      */
-    export async function quarter(year: number, quarter: Quarter) {
+    export async function quarter(
+      year: number,
+      quarter: Quarter
+    ): Promise<ReportDataForRender[]> {
       const quarter_begin = new Date(`${year}-${(quarter - 1) * 3 + 1}`)
       const quarter_end = new Date(
         quarter < 4 ? `${year}-${quarter * 3 + 1}` : `${year + 1}-${1}`
@@ -63,14 +66,14 @@ export namespace report {
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),
-        })) as ReportDataForRender[]
+        }))
     }
     /**
      * @param year which year
      *
      * @returns year's event info list for rendering
      */
-    export async function year(year: number) {
+    export async function year(year: number): Promise<ReportDataForRender[]> {
       const year_begin = new Date(`${year}`)
       const year_end = new Date(`${year + 1}`)
       return (await get_event_info_list())
@@ -82,7 +85,7 @@ export namespace report {
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),
-        })) as ReportDataForRender[]
+        }))
     }
   }
 }
