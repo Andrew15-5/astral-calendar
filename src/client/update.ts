@@ -77,6 +77,65 @@ function update_calendar_days(calendar: Element, month: Month, year: number) {
   })
 }
 
+function update_calendar_deadlines(
+  event_list: Element[],
+  calendar: Element,
+  month: Month,
+  year: number
+) {
+  const total_days_on_calendar = 6 * 7 // 6 rows/weeks = 42
+  const day_rows = calendar.querySelectorAll('.row.with-digits') // 6 rows/weeks
+
+  if (day_rows.length !== 6) return
+
+  const day_elements = Array.from(day_rows)
+    .map((row) => Array.from(row.querySelectorAll('.cell-wrapper')))
+    .flat()
+
+  if (day_elements.length !== total_days_on_calendar) return
+
+  const start_of_the_month = new Date(`${year}-${month}`)
+  let first_week_day = start_of_the_month.getDay()
+  if (first_week_day === 0) first_week_day = 7 // [Sunday;Saturday] -> [0;6]
+
+  // 0 days if current month starts from Monday.
+  const days_from_previous_month = first_week_day === 1 ? 0 : first_week_day - 1
+
+  // 0th day changes to the last day of the previous month (month is 0-based).
+  const days_in_current_month = new Date(year, month, 0).getDate()
+
+  day_elements.forEach((day_element) =>
+    day_element.classList.remove('deadline')
+  )
+
+  // 1. Extract month & day info from event elements
+  // 2. Leave only info with current month
+  const event_deadline_info_list = event_list
+    .map((event) => {
+      return {
+        // name: event.querySelector('.name')!,
+        month: parseInt(event.getAttribute('data-deadline-month')!) as Month,
+        day: parseInt(event.getAttribute('data-deadline-day')!),
+      }
+    })
+    .filter((event) => event.month === month)
+
+  for (
+    let days_offset = 0;
+    days_offset < days_in_current_month;
+    days_offset++
+  ) {
+    const index = days_from_previous_month + days_offset
+    const day_of_month = days_offset + 1
+    const found = event_deadline_info_list.find(
+      (event) => event.day === day_of_month
+    )
+    if (found) {
+      day_elements[index].classList.add('deadline')
+    }
+  }
+}
+
 function update_report_period_for_month(
   report_period_text: Element,
   month: Month,
@@ -120,12 +179,19 @@ function get_month_list_for_quarter(quarter: Quarter) {
 
 namespace update {
   export namespace calendar {
-    export function month(calendar: Element, month: Month, year: number) {
+    export function month(
+      event_list: Element[],
+      calendar: Element,
+      month: Month,
+      year: number
+    ) {
       update_calendar_arrows(calendar, month)
       update_calendar_text(calendar, month, year)
       update_calendar_days(calendar, month, year)
+      update_calendar_deadlines(event_list, calendar, month, year)
     }
     export function quarter(
+      event_list_list: Element[][],
       calendars: Element[],
       quarter: Quarter,
       year: number
@@ -135,6 +201,12 @@ namespace update {
       for (let i = 0; i < months_in_quarter; i++) {
         update_calendar_text(calendars[i], months[i], year)
         update_calendar_days(calendars[i], months[i], year)
+        update_calendar_deadlines(
+          event_list_list[i],
+          calendars[i],
+          months[i],
+          year
+        )
       }
     }
   }
