@@ -128,14 +128,6 @@ function update_report_period_for_month(
   } ${year} г.`
 }
 
-function hide(li_list: Element[]) {
-  li_list.forEach((li) => li.classList.add('hide'))
-}
-
-function show(li_list: Element[]) {
-  li_list.forEach((li) => li.classList.remove('hide'))
-}
-
 function update_visible_events_for_month(event_list: Element[], month: Month) {
   const month_event_list = event_list.filter((li) => {
     const event_month = li.getAttribute('data-deadline-month')
@@ -145,8 +137,9 @@ function update_visible_events_for_month(event_list: Element[], month: Month) {
   const other_months_event_list = event_list.filter(
     (element) => !month_event_list.includes(element)
   )
-  show(month_event_list)
-  hide(other_months_event_list)
+
+  month_event_list.forEach((li) => li.classList.remove('hide')) // Show
+  other_months_event_list.forEach((li) => li.classList.add('hide')) // Hide
 }
 
 function get_month_list_for_quarter(quarter: Quarter) {
