@@ -19,25 +19,27 @@ function format_date(date: Date) {
 export namespace report {
   export namespace for_render {
     /**
-     * @param year month of which year
-     * @param month month's ordinal number [1;12]
+     * Because there are no AJAX calls on client, the only way to retrieve data
+     * for all months is by sending data for all months first and then only show
+     * data that is relevant for current month.
      *
-     * @returns month's event info list for rendering
+     * @param year which year
+     *
+     * @returns year's event info list for rendering
      */
-    export async function month(year: number, month: Month) {
-      const month_begin = new Date(`${year}-${month}`)
-      const month_end = new Date(
-        month < 12 ? `${year}-${month + 1}` : `${year + 1}-${1}`
-      )
+    export async function month(year: number) {
+      const year_begin = new Date(`${year}`)
+      const year_end = new Date(`${year + 1}`)
       return (await get_event_info_list())
-        .filter((event) => event.end >= month_begin && event.end < month_end)
+        .filter((event) => event.end >= year_begin && event.end < year_end)
         .map((event) => ({
           'week-day': week_days[event.end.getDay() - 1],
           'month-day': event.end.getDate(),
+          'deadline-month': event.end.getMonth() + 1,
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),
-        }))
+        })) as ReportDataForRender[]
     }
     /**
      * @param year quarter's year

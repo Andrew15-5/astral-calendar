@@ -65,9 +65,10 @@ export namespace api {
 
       response.status(200).render('month', {
         calendar: calendar_data,
-        events: await report.for_render.year(year),
+        events: await report.for_render.month(year),
       })
     }
+
     export async function quarter(
       request: Request<{ year: string; quarter: string }>,
       response: Response
