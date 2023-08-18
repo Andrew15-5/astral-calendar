@@ -113,12 +113,11 @@ function update_calendar_deadlines(
     .filter((event) => event.month === month)
 
   for (
-    let days_offset = 0;
-    days_offset < days_in_current_month;
-    days_offset++
+    let day_of_month = 1; // [1;31]
+    day_of_month <= days_in_current_month;
+    day_of_month++
   ) {
-    const index = days_from_previous_month + days_offset
-    const day_of_month = days_offset + 1
+    const index = days_from_previous_month + day_of_month - 1
     const found = event_deadline_info_list.find(
       (event) => event.day === day_of_month
     )
