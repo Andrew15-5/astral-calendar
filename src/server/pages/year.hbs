@@ -1,0 +1,14 @@
+{{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
+https://www.gnu.org/licenses/agpl-3.0.txt --}}
+<!DOCTYPE html>
+<html lang="en">
+  {{> head title="Календарь"}}
+  <body>
+    {{#> calendar_container}} {{#each grouped_events}}
+    <h3 class="report-period">Отчётность за {{month}} {{year}} г.</h3>
+    <ol class="event-list">
+      {{#each event-list}} {{> event}} {{/each}}
+    </ol>
+    {{/each}} {{/ calendar_container}}
+  </body>
+</html>

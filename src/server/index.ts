@@ -37,5 +37,6 @@ app.get('/', (_request, response) => response.redirect('/calendar/'))
 app.get(calendar.make_url.no_params.main(), calendar.api.get.main)
 app.get(calendar.make_url.no_params.month(), calendar.api.get.month)
 app.get(calendar.make_url.no_params.quarter(), calendar.api.get.quarter)
+app.get(calendar.make_url.no_params.year(), calendar.api.get.year)
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

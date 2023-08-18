@@ -26,7 +26,7 @@ function make_url_of_selector_item(
       index = element_index + 1 // [1; 4]
       return make_url.quarter(current_year, index)
     case 'year':
-      return 'javascript: alert("Not yet implemented")'
+      return make_url.year(years[element_index])
   }
 }
 
@@ -120,6 +120,37 @@ export namespace api {
 
       response.status(200).render('quarter', {
         calendars: calendars_data,
+        grouped_events: grouped_events,
+      })
+    }
+
+    export async function year(
+      request: Request<{ year: string; quarter: string }>,
+      response: Response
+    ) {
+      const { year: year_str } = request.params
+      const year = Number.parseInt(year_str)
+      if (isNaN(year)) return response.redirect(make_url.no_params.main())
+
+      // Making calendars_data
+      const months_in_year = 12
+
+      const events = await report.for_render.year(year)
+      const grouped_events = Array.from({ length: months_in_year }, (_, i) => ({
+        year: year,
+        month: month_names[i],
+        'event-list': [] as ReportDataForRender[],
+      }))
+      for (const event of events) {
+        for (let i = 0; i < months_in_year; i++) {
+          const month = i + 1 // Month index -> number
+          if (event['deadline-month'] === month) {
+            grouped_events[i]['event-list'].push(event)
+          }
+        }
+      }
+
+      response.status(200).render('year', {
         grouped_events: grouped_events,
       })
     }
