@@ -14,12 +14,13 @@ function update_calendar_and_report(
   update.report.month(report_text, event_list, month, year)
 }
 
-function update_url(new_month: Month) {
+function change_month_in_url(new_month: Month) {
   const base = window.location.origin
   const path = window.location.pathname
-  const search = new RegExp(`(.*)(?<=\\/)\\d+`)
-  const replace = `$1${new_month}`
-  const new_url = base + path.replace(search, replace)
+  // Pattern:
+  // (anything/)number
+  const pattern = /(.*)(?<=\/)\d+/
+  const new_url = base + path.replace(pattern, `$1${new_month}`)
   window.history.replaceState({}, '', new_url)
 }
 
@@ -52,14 +53,14 @@ function update_url(new_month: Month) {
     if (month === 1) return
     month = (month - 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
-    update_url(month)
+    change_month_in_url(month)
   })
 
   next_month_button.addEventListener('click', () => {
     if (month === 12) return
     month = (month + 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
-    update_url(month)
+    change_month_in_url(month)
   })
 })()
 
