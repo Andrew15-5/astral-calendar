@@ -21,6 +21,7 @@
     img
       width: 16px
       height: 16px
+      transition: transform 0.1s
       transform: rotate(-90deg)
 
   .report-period
@@ -38,6 +39,9 @@
   .month-report.opened
     .month-dropdown-toggle
       border-radius: 0.5rem 0.5rem 0 0
+
+      img
+        transform: rotate(90deg)
 
     .month-dropdown-menu
       height: auto
