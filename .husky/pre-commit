@@ -5,8 +5,10 @@
 
 if files=$(grep -rL Copyright src | grep -vi .json); then
   echo
-  echo Add copyright notice to next files:
-  echo "$files"
+  echo ❗Add copyright notice to the next files:
+  echo "$files" | while read -r file; do
+    echo " ‣ $file"
+  done
   echo
   exit 1
 fi
