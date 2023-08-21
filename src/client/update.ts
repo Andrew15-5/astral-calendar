@@ -123,9 +123,11 @@ function update_calendar_deadlines(
     )
     if (found) {
       day_elements[index].classList.add('deadline')
-      day_elements[index].addEventListener('click', () =>
+      day_elements[index].addEventListener('click', () => {
         found.element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      )
+        found.element.classList.add('highlight')
+        setTimeout(() => found.element.classList.remove('highlight'), 3000)
+      })
     }
   }
 }

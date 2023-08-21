@@ -65,6 +65,17 @@
     gap: 8px
     background: var.$white
 
+    &.highlight
+      animation: 1s linear 3 forwards pulse
+
+    @keyframes pulse
+      0%
+        background: var.$white
+      50%
+        background: var.$blue-gray-2
+      100%
+        background: var.$white
+
     .deadline-wrapper
       display: flex
       justify-content: center
