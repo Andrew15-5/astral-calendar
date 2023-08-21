@@ -5,10 +5,23 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
   {{> head title="Календарь"}}
   <body>
     {{#> calendar_container}} {{#each grouped_events}}
-    <h3 class="report-period">Отчётность за {{month}} {{year}} г.</h3>
-    <ol class="event-list">
-      {{#each event-list}} {{> event}} {{/each}}
-    </ol>
+    <div class="month-report">
+      <button
+        id="{{month}}-dropdown-toggle"
+        class="month-dropdown-toggle"
+        aria-controls="{{name}}-dropdown-menu"
+        aria-expanded="false"
+      >
+        <span class="report-period">Отчётность за {{month}} {{year}} г.</span>
+        <img src="/static/images/Стрелка маленькая left.svg" />
+      </button>
+      <div class="month-dropdown-menu">
+        <ol class="event-list">
+          {{#each event-list}} {{> event}} {{/each}}
+        </ol>
+      </div>
+    </div>
     {{/each}} {{/ calendar_container}}
+    <script type="text/javascript" src="/static/js/year.js"></script>
   </body>
 </html>

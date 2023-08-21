@@ -21,6 +21,7 @@ const config = {
     selectors: './src/client/selectors.ts',
     month: './src/client/month.ts',
     quarter: './src/client/quarter.ts',
+    year: './src/client/year.ts',
     main: './src/styles/main.sass',
     ...(is_development
       ? { live: path.join(public_dir, '.dev', 'live.js') }
