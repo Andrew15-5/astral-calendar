@@ -19,14 +19,18 @@ function update_calendar_and_report(
   const report_text = document.querySelector('#calendar .report-period')
   if (calendar === null || report_text === null) return
 
-  const left_arrow = calendar.querySelector('.header .arrow.left')
-  const right_arrow = calendar.querySelector('.header .arrow.right')
+  const previous_month_button = calendar.querySelector('.header .arrow.left')
+  const next_month_button = calendar.querySelector('.header .arrow.right')
   const event_list = Array.from(
     document.querySelectorAll('#calendar .event-list .event')
   )
   const year_and_month = get_year_and_month()
 
-  if (year_and_month === false || left_arrow === null || right_arrow === null) {
+  if (
+    year_and_month === false ||
+    previous_month_button === null ||
+    next_month_button === null
+  ) {
     return
   }
 
@@ -34,13 +38,13 @@ function update_calendar_and_report(
 
   update_calendar_and_report(report_text, calendar, event_list, month, year)
 
-  left_arrow.addEventListener('click', () => {
+  previous_month_button.addEventListener('click', () => {
     if (month === 1) return
     month = (month - 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
   })
 
-  right_arrow.addEventListener('click', () => {
+  next_month_button.addEventListener('click', () => {
     if (month === 12) return
     month = (month + 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
