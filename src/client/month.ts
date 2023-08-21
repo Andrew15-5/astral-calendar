@@ -3,7 +3,7 @@
 import update from './update'
 import { get_year_and_month } from './utils'
 
-export function update_calendar_and_report(
+function update_calendar_and_report(
   report_text: Element,
   calendar: Element,
   event_list: Element[],
@@ -14,7 +14,7 @@ export function update_calendar_and_report(
   update.report.month(report_text, event_list, month, year)
 }
 
-function month_top_level_function() {
+;(() => {
   const calendar = document.querySelector('#calendar .calendar')
   const report_text = document.querySelector('#calendar .report-period')
   if (calendar === null || report_text === null) return
@@ -45,6 +45,4 @@ function month_top_level_function() {
     month = (month + 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
   })
-}
-
-month_top_level_function()
+})()
