@@ -1,0 +1,10 @@
+{{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
+https://www.gnu.org/licenses/agpl-3.0.txt --}}
+<div class="change-year-section">
+  <h6>Изменить год:</h6>
+  <select id="change-year" name="year">
+    {{#each years}}
+    <option{{#if selected}} selected=""{{/if}}>{{year}}</option>
+    {{/each}}
+  </select>
+</div>

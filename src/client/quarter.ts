@@ -1,7 +1,7 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import update from './update'
-import { get_year_and_quarter } from './utils'
+import { add_logic_for_year_changer, get_year_and_quarter } from './utils'
 
 const calendars_test = document.querySelectorAll('#calendar .calendar')
 const report_text_list = Array.from(
@@ -23,3 +23,5 @@ if (
   update.calendar.quarter(event_list_list, calendars, quarter, year)
   update.report.quarter(report_text_list, quarter, year)
 }
+
+add_logic_for_year_changer()

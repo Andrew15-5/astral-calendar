@@ -38,3 +38,37 @@ export function get_day_elements(
   if (day_elements.length !== total_days_on_calendar) return null
   return day_elements
 }
+
+function change_year(new_year: number) {
+  const base = window.location.origin
+  const path = window.location.pathname
+  // Pattern:
+  // /number/
+  // /number$
+  const pattern = /(?<=\/)\d+(?=\/|$)/
+  const new_url = base + path.replace(pattern, new_year.toString())
+  window.location.href = new_url
+}
+
+function get_default_option(element: HTMLSelectElement) {
+  const default_option_list = Array.from(element.options).filter((option) =>
+    option.hasAttribute('selected')
+  )
+  if (default_option_list.length !== 1) return null
+  return default_option_list[0]
+}
+
+export function add_logic_for_year_changer() {
+  const change_year_select = document.getElementById(
+    'change-year'
+  ) as HTMLSelectElement | null
+  if (change_year_select === null) return
+  const default_option = get_default_option(change_year_select)
+  if (default_option === null) return
+  change_year_select.value = default_option.value
+  change_year_select.addEventListener('change', function () {
+    const new_year = parseInt((this as HTMLSelectElement).value)
+    if (isNaN(new_year)) return
+    change_year(new_year)
+  })
+}

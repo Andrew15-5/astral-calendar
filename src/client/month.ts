@@ -1,7 +1,7 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import update from './update'
-import { get_year_and_month } from './utils'
+import { add_logic_for_year_changer, get_year_and_month } from './utils'
 
 function update_calendar_and_report(
   report_text: Element,
@@ -62,3 +62,5 @@ function update_url(new_month: Month) {
     update_url(month)
   })
 })()
+
+add_logic_for_year_changer()

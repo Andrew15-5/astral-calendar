@@ -41,6 +41,13 @@ function get_selectors_data() {
   }))
 }
 
+function get_years_for_year_changer(year: number) {
+  return years.map((_year) => ({
+    year: _year,
+    selected: _year === year,
+  }))
+}
+
 export namespace api {
   export namespace get {
     export function main(_request: Request, response: Response) {
@@ -64,6 +71,7 @@ export namespace api {
       }
 
       response.status(200).render('month', {
+        years: get_years_for_year_changer(year),
         calendar: calendar_data,
         events: await report.for_render.month(year),
       })
@@ -119,6 +127,7 @@ export namespace api {
       }
 
       response.status(200).render('quarter', {
+        years: get_years_for_year_changer(year),
         calendars: calendars_data,
         grouped_events: grouped_events,
       })
@@ -151,6 +160,7 @@ export namespace api {
       }
 
       response.status(200).render('year', {
+        years: get_years_for_year_changer(year),
         grouped_events: grouped_events,
       })
     }

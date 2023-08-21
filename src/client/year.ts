@@ -1,5 +1,7 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+import { add_logic_for_year_changer } from './utils'
+
 type MonthReport = {
   self: HTMLElement
   dropdown_button: HTMLElement
@@ -28,3 +30,5 @@ for (const month_report of month_report_list) {
     }
   })
 }
+
+add_logic_for_year_changer()

@@ -4,7 +4,7 @@ https://www.gnu.org/licenses/agpl-3.0.txt --}}
 <html lang="en">
   {{> head title="Календарь"}}
   <body>
-    {{#> calendar_container}} {{#each grouped_events}}
+    {{#> calendar_container}} {{> year_changer}} {{#each grouped_events}}
     <div class="month-report">
       <button
         id="{{month}}-dropdown-toggle"
