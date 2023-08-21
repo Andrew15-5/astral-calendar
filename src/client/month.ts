@@ -14,6 +14,15 @@ function update_calendar_and_report(
   update.report.month(report_text, event_list, month, year)
 }
 
+function update_url(new_month: Month) {
+  const base = window.location.origin
+  const path = window.location.pathname
+  const search = new RegExp(`(.*)(?<=\\/)\\d+`)
+  const replace = `$1${new_month}`
+  const new_url = base + path.replace(search, replace)
+  window.history.replaceState({}, '', new_url)
+}
+
 ;(() => {
   const calendar = document.querySelector('#calendar .calendar')
   const report_text = document.querySelector('#calendar .report-period')
@@ -34,6 +43,7 @@ function update_calendar_and_report(
     return
   }
 
+  // `month` is updated on month change
   let [year, month] = year_and_month
 
   update_calendar_and_report(report_text, calendar, event_list, month, year)
@@ -42,11 +52,13 @@ function update_calendar_and_report(
     if (month === 1) return
     month = (month - 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
+    update_url(month)
   })
 
   next_month_button.addEventListener('click', () => {
     if (month === 12) return
     month = (month + 1) as Month
     update_calendar_and_report(report_text, calendar, event_list, month, year)
+    update_url(month)
   })
 })()
