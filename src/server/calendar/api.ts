@@ -134,7 +134,7 @@ export namespace api {
     }
 
     export async function year(
-      request: Request<{ year: string; quarter: string }>,
+      request: Request<{ year: string }>,
       response: Response
     ) {
       const { year: year_str } = request.params
