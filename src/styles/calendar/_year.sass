@@ -1,0 +1,47 @@
+// Copyright (C) 2023  Andrew Voynov
+// See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+@use "../variables" as var
+
+#calendar
+  .month-dropdown-toggle
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 1.5rem 1.5rem 1.5rem 3rem
+    margin-top: 1.5rem
+    border: 1px solid var.$blue-gray-2
+    border-radius: 0.5rem
+    background: var.$white
+    cursor: pointer
+
+    &:hover
+      background: var.$white-hover
+
+    img
+      width: 16px
+      height: 16px
+      transition: transform 0.1s
+      transform: rotate(-90deg)
+
+  .report-period
+    margin-top: 0
+
+  .month-dropdown-menu
+    border-radius: 0 0 0.5rem 0.5rem
+    overflow: hidden
+    height: 0
+
+  .event-list
+    padding: 1rem
+    background: var.$white-background
+
+  .month-report.opened
+    .month-dropdown-toggle
+      border-radius: 0.5rem 0.5rem 0 0
+
+      img
+        transform: rotate(90deg)
+
+    .month-dropdown-menu
+      height: auto

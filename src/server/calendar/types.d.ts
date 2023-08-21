@@ -10,6 +10,7 @@ type ReportDataForRender = {
   'week-day': string
   'month-day': number
   'deadline-month': number
+  'deadline-day'?: number
   name: string
   begin: string
   end: string
