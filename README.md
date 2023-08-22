@@ -61,8 +61,12 @@ just c # Watch TS & SASS files for client
 - `SPREADSHEET_TO_CSV_DOCKER_IMAGE` (default: `andrew1555/ssconvert`)
   - Spreadsheet file's content is passed to stdin of container and CSV
     data is received in stdout.
-- `SPREADSHEET_FILE_REGEX_PATTERN` (default: `.(ods|gnumeric|xlsx?)$`)
+- `SPREADSHEET_FILE_REGEX_PATTERN` --- JavaScript regex pattern
+  (default: `.(ods|gnumeric|xlsx?)$`)
   - Most popular formats are included which can be processed by `ssconvert`.
-- `SPREADSHEET_FILE_REGEX_FLAGS` (default: `i`)
+- `SPREADSHEET_FILE_REGEX_FLAGS` --- JavaScript regex flags (default: `i`)
   - Upper and lower case letters in the spreadsheet file format
     are treated as identical.
+- `SPREADSHEET_COLUMN_NAME` --- column number with event name (default: `1`)
+- `SPREADSHEET_COLUMN_BEGIN` --- column number with event begin date (default: `6`)
+- `SPREADSHEET_COLUMN_END` --- column number with event end date (default: `7`)

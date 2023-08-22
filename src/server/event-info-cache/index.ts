@@ -21,13 +21,16 @@ function error(message?: any) {
  *
  * @returns list of info about events from CSV data
  */
-function get_event_info_from_csv_data(csv_data: string): EventInfo[] {
+function get_event_info_from_csv_data(
+  csv_data: string,
+  csv_columns: CSVColumns
+): EventInfo[] {
   const init_data: string[][] = csv.parse(csv_data, { fromLine: 2 })
   const out: EventInfo[] = init_data
     .map((row) => ({
-      name: row[0],
-      begin: new Date(row[row.length - 2]),
-      end: new Date(row[row.length - 1]),
+      name: row[csv_columns.name - 1],
+      begin: new Date(row[csv_columns.begin - 1]),
+      end: new Date(row[csv_columns.end - 1]),
     }))
     .sort((a, b) => (a.end < b.end ? -1 : 1)) // Sort by deadline
   return out
@@ -59,7 +62,7 @@ function print_updated_map() {
   )
 }
 
-async function on_file_add(file: string) {
+async function on_file_add(file: string, csv_columns: CSVColumns) {
   log(`Converting data from file ${file}`)
   const command = `${binary} < ${path.join(data_dir, file)} 2>/dev/null`
   const csv_data_promise: Promise<string> = new Promise((resolve, reject) => {
@@ -75,7 +78,7 @@ async function on_file_add(file: string) {
     const csv_data = await csv_data_promise
     file_to_event_info_map = new Map([
       ...Array.from(file_to_event_info_map),
-      [file, get_event_info_from_csv_data(csv_data)],
+      [file, get_event_info_from_csv_data(csv_data, csv_columns)],
     ])
     print_updated_map()
   } catch (error) {
@@ -117,6 +120,15 @@ export function start_caching() {
     spreadsheet_file_regex_flags
   )
 
+  const name_column = parseInt(process.env.SPREADSHEET_COLUMN_NAME || '1')
+  const begin_column = parseInt(process.env.SPREADSHEET_COLUMN_BEGIN || '6')
+  const end_column = parseInt(process.env.SPREADSHEET_COLUMN_END || '7')
+  const csv_columns: CSVColumns = {
+    name: name_column,
+    begin: begin_column,
+    end: end_column,
+  }
+
   if (!fs.existsSync(data_dir)) {
     error(`Can't access dir (${data_dir}/), creating`)
     fs.mkdirSync(data_dir, { mode: 0o775 })
@@ -127,7 +139,7 @@ export function start_caching() {
     if (filename === null || !spreadsheet_file_regex.test(filename)) return
     // log(filename, event)
     if (fs.existsSync(path.join(data_dir, filename))) {
-      on_file_add(filename)
+      on_file_add(filename, csv_columns)
     } else {
       on_file_remove(filename)
     }
@@ -151,6 +163,6 @@ export function start_caching() {
   }
 
   for (const file of files) {
-    on_file_add(file)
+    on_file_add(file, csv_columns)
   }
 }

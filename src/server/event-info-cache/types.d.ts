@@ -5,3 +5,9 @@ type EventInfo = {
   begin: Date
   end: Date
 }
+
+type CSVColumns = {
+  name: number
+  begin: number
+  end: number
+}
