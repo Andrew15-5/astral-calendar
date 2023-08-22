@@ -1,0 +1,17 @@
+// Copyright (C) 2023  Andrew Voynov
+// See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+@use "../variables" as var
+
+.calendar-tooltip
+  display: none
+  flex-direction: column
+  gap: 5px
+  background: white
+  border: 1px solid var.$tooltip-background
+  box-shadow: var.$shadow-xs
+  color: black
+  width: auto
+  position: absolute
+  pointer-events: none
+  padding: 10px
+  border-radius: 5px

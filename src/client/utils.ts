@@ -36,7 +36,7 @@ export function get_day_elements(
     .flat()
 
   if (day_elements.length !== total_days_on_calendar) return null
-  return day_elements
+  return day_elements as HTMLElement[]
 }
 
 function change_year(new_year: number) {

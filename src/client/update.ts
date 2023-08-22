@@ -67,6 +67,85 @@ function update_calendar_days(calendar: Element, month: Month, year: number) {
   })
 }
 
+function format_listed_names(ordered_number: number, name: string) {
+  return `${ordered_number}. ${name}`
+}
+
+const tooltip = document.createElement('div')
+tooltip.classList.add('calendar-tooltip')
+document.body.appendChild(tooltip)
+
+/**
+ * Used to check if tooltip should be to the left of the cursor or to the right.
+ */
+let tooltip_for_check: HTMLElement
+/**
+ * Show tooltip to the right of the cursor if true, otherwise show it to the
+ * left of the cursor.
+ */
+let right_side = true
+
+type EventDeadlineInfo = {
+  name: string
+  element: Element
+  month: Month
+  day: number
+}
+
+function mouseenter(
+  event_deadline_info_list: EventDeadlineInfo[],
+  day_of_month: number
+) {
+  tooltip.style.display = 'flex'
+  event_deadline_info_list
+    // Events with deadlines on the hovered day
+    .filter((info) => info.day === day_of_month)
+    // Create list of names (inside spans)
+    .map((event, index) => {
+      const span = document.createElement('span')
+      span.innerHTML = format_listed_names(index + 1, event.name)
+      return span
+    })
+    // Add names (spans) to the tooltip box
+    .forEach((span) => tooltip.appendChild(span))
+  tooltip_for_check = tooltip.cloneNode(true) as HTMLDivElement
+}
+
+function reset_used_values_for_tooltip(tooltip: HTMLElement) {
+  tooltip.style.display = 'none'
+  tooltip.style.right = 'auto'
+  tooltip.innerHTML = ''
+}
+
+function move_tooltip_with_mouse(event: MouseEvent) {
+  const viewport_width = window.innerWidth
+  const left = `${event.pageX + 15}px`
+  const top = `${event.pageY}px`
+  const right = `${viewport_width - event.pageX}px`
+  tooltip.style.top = top
+  tooltip_for_check.style.top = top
+  tooltip_for_check.style.left = left
+
+  // Can't check dimentions without attaching to the DOM.
+  document.body.appendChild(tooltip_for_check)
+  const box = tooltip_for_check.getBoundingClientRect()
+  document.body.removeChild(tooltip_for_check)
+
+  const other = viewport_width - box.width
+
+  // 1. box is pumped into right border
+  // 2. left side is wider than the right one
+  right_side = !(box.x + box.width === viewport_width && other > box.width)
+
+  if (right_side) {
+    tooltip.style.left = left
+    tooltip.style.right = 'auto'
+  } else {
+    tooltip.style.left = 'auto'
+    tooltip.style.right = right
+  }
+}
+
 function update_calendar_deadlines(
   event_list: Element[],
   calendar: Element,
@@ -89,7 +168,7 @@ function update_calendar_deadlines(
   function remove_all_event_listeners(element: Element) {
     var new_element = element.cloneNode(true)
     element.parentNode!.replaceChild(new_element, element)
-    return new_element as Element
+    return new_element as HTMLElement
   }
 
   // Reset everything before applying new changes to elements
@@ -101,10 +180,10 @@ function update_calendar_deadlines(
   // 1. Extract month & day info from event elements
   // and save event element itself
   // 2. Leave only info with current month
-  const event_deadline_info_list = event_list
+  const event_deadline_info_list: EventDeadlineInfo[] = event_list
     .map((event) => {
       return {
-        // name: event.querySelector('.name')!,
+        name: event.querySelector('.name')!.innerHTML,
         element: event,
         month: parseInt(event.getAttribute('data-deadline-month')!) as Month,
         day: parseInt(event.getAttribute('data-deadline-day')!),
@@ -128,6 +207,13 @@ function update_calendar_deadlines(
         found.element.classList.add('highlight')
         setTimeout(() => found.element.classList.remove('highlight'), 3000)
       })
+      day_elements[index].addEventListener('mouseenter', () =>
+        mouseenter(event_deadline_info_list, day_of_month)
+      )
+      day_elements[index].addEventListener('mouseleave', () =>
+        reset_used_values_for_tooltip(tooltip)
+      )
+      day_elements[index].addEventListener('mousemove', move_tooltip_with_mouse)
     }
   }
 }
