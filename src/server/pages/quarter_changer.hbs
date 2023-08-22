@@ -1,0 +1,10 @@
+{{!-- Copyright (C) 2023 Andrew Voynov. See license in LICENSE file or at
+https://www.gnu.org/licenses/agpl-3.0.txt --}}
+<div class="change-quarter-section">
+  <h6>Изменить квартал:</h6>
+  <select id="change-quarter" name="quarter">
+    {{#each quarters}}
+    <option data-quarter="{{number}}"{{#if selected}} selected=""{{/if}}>{{quarter}}</option>
+    {{/each}}
+  </select>
+</div>

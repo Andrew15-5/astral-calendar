@@ -48,6 +48,14 @@ function get_years_for_year_changer(year: number) {
   }))
 }
 
+function get_quarters_for_quarter_changer(quarter: Quarter) {
+  return quarter_names.map((name, i) => ({
+    quarter: name,
+    number: i + 1,
+    selected: i + 1 === quarter,
+  }))
+}
+
 export namespace api {
   export namespace get {
     export function main(_request: Request, response: Response) {
@@ -125,6 +133,7 @@ export namespace api {
 
       response.status(200).render('quarter', {
         years: get_years_for_year_changer(year),
+        quarters: get_quarters_for_quarter_changer(quarter),
         calendars: calendars_data,
         grouped_events: grouped_events,
       })

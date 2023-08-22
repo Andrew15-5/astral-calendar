@@ -1,3 +1,4 @@
 # https://github.com/prettier/prettier/issues/15250
 src/server/pages/event.hbs
 src/server/pages/year_changer.hbs
+src/server/pages/quarter_changer.hbs
