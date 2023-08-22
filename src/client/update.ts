@@ -156,6 +156,23 @@ function update_visible_events_for_month(event_list: Element[], month: Month) {
   other_months_event_list.forEach((li) => li.classList.add('hide')) // Hide
 }
 
+function update_visible_events_for_quarter(
+  event_list: Element[],
+  quarter: Quarter
+) {
+  const month_event_list = event_list.filter((li) => {
+    const event_quarter = li.getAttribute('data-quarter')
+    if (event_quarter === null) return false
+    return parseInt(event_quarter) === quarter
+  })
+  const other_months_event_list = event_list.filter(
+    (element) => !month_event_list.includes(element)
+  )
+
+  month_event_list.forEach((li) => li.classList.remove('hide')) // Show
+  other_months_event_list.forEach((li) => li.classList.add('hide')) // Hide
+}
+
 function get_month_list_for_quarter(quarter: Quarter) {
   const months_in_quarter = 3
   const first_month = (quarter - 1) * months_in_quarter + 1
@@ -214,6 +231,7 @@ namespace update {
     }
     export function quarter(
       report_text_list: Element[],
+      event_list_list: Element[][],
       quarter: Quarter,
       year: number
     ) {
@@ -221,6 +239,7 @@ namespace update {
       const months = get_month_list_for_quarter(quarter)
       for (let i = 0; i < months_in_quarter; i++) {
         update_report_period_for_month(report_text_list[i], months[i], year)
+        update_visible_events_for_quarter(event_list_list[i], quarter)
       }
     }
   }

@@ -11,6 +11,7 @@ type ReportDataForRender = {
   'month-day': number
   'deadline-month': number
   'deadline-day'?: number
+  quarter?: Quarter
   name: string
   begin: string
   end: string

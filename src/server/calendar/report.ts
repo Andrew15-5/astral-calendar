@@ -44,28 +44,27 @@ export namespace report {
     }
 
     /**
-     * @param year quarter's year
-     * @param quarter quarter's ordinal number [1;4]
+     * Because there are no AJAX calls on client, the only way to retrieve data
+     * for all quarters is by sending data for all quarters first and then only
+     * show data that is relevant for current quarter.
      *
-     * @returns quarter's event info list for rendering
+     * @param year which year
+     *
+     * @returns year's event info list for rendering
      */
     export async function quarter(
-      year: number,
-      quarter: Quarter
+      year: number
     ): Promise<ReportDataForRender[]> {
-      const quarter_begin = new Date(`${year}-${(quarter - 1) * 3 + 1}`)
-      const quarter_end = new Date(
-        quarter < 4 ? `${year}-${quarter * 3 + 1}` : `${year + 1}-${1}`
-      )
+      const year_begin = new Date(`${year}`)
+      const year_end = new Date(`${year + 1}`)
       return (await get_event_info_list())
-        .filter(
-          (event) => event.end >= quarter_begin && event.end < quarter_end
-        )
+        .filter((event) => event.end >= year_begin && event.end < year_end)
         .map((event) => ({
           'week-day': week_days[event.end.getDay() - 1],
           'month-day': event.end.getDate(),
           'deadline-month': event.end.getMonth() + 1,
           'deadline-day': event.end.getDate(),
+          quarter: Math.ceil((event.end.getMonth() + 1) / 3) as Quarter,
           name: event.name,
           begin: format_date(event.begin),
           end: format_date(event.end),

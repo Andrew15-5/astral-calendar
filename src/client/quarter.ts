@@ -21,7 +21,7 @@ if (
   const calendars = Array.from(calendars_test)
   const [year, quarter] = year_and_quarter
   update.calendar.quarter(event_list_list, calendars, quarter, year)
-  update.report.quarter(report_text_list, quarter, year)
+  update.report.quarter(report_text_list, event_list_list, quarter, year)
 }
 
 add_logic_for_year_changer()
