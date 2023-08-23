@@ -40,8 +40,6 @@ function get_event_info_from_csv_data(
 let data_dir: string
 let binary: string
 
-// const spreadsheet_file_regex = /\.(ods|gnumeric|xlsx?)$/i
-
 let file_to_event_info_map = new Map<string, EventInfo[]>()
 
 export function get_event_info_list_from_cache() {
@@ -137,7 +135,6 @@ export function start_caching() {
   log(`Watching spreadsheet files in ${data_dir}/`)
   dir_watcher = fs.watch(data_dir, (_event, filename) => {
     if (filename === null || !spreadsheet_file_regex.test(filename)) return
-    // log(filename, event)
     if (fs.existsSync(path.join(data_dir, filename))) {
       on_file_add(filename, csv_columns)
     } else {
