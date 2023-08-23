@@ -7,7 +7,12 @@ import { Request, Response } from 'express'
 
 import { make_url, report } from './index'
 
-const years = [2020, 2021, 2022]
+const first_year = 2020
+const last_year = new Date().getFullYear()
+const years: number[] = []
+for (let year = first_year; year <= last_year; year++) {
+  years.push(year)
+}
 
 const selector_names: SelectorName[] = ['month', 'quarter', 'year']
 const selector_data = [month_names, quarter_names, years]
