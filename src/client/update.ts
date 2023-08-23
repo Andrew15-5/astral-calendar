@@ -92,6 +92,12 @@ type EventDeadlineInfo = {
   day: number
 }
 
+function jump_to_event(event: Element) {
+  event.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  event.classList.add('highlight')
+  setTimeout(() => event.classList.remove('highlight'), 3000)
+}
+
 function mouseenter(
   event_deadline_info_list: EventDeadlineInfo[],
   day_of_month: number
@@ -202,11 +208,9 @@ function update_calendar_deadlines(
     )
     if (found) {
       day_elements[index].classList.add('deadline')
-      day_elements[index].addEventListener('click', () => {
-        found.element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        found.element.classList.add('highlight')
-        setTimeout(() => found.element.classList.remove('highlight'), 3000)
-      })
+      day_elements[index].addEventListener('click', () =>
+        jump_to_event(found.element)
+      )
       day_elements[index].addEventListener('mouseenter', () =>
         mouseenter(event_deadline_info_list, day_of_month)
       )
