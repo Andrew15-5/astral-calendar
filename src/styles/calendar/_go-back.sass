@@ -1,0 +1,18 @@
+// Copyright (C) 2023  Andrew Voynov
+// See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
+@use "../variables" as var
+
+#calendar
+  .go-back
+    width: fit-content
+    display: block
+    color: var.$black
+    text-decoration: none
+    background: var.$go-back-background
+    margin-bottom: 9px
+    padding: 4px 7px
+    border-radius: 8px
+    border: 1px solid var.$go-back-border
+
+    &:hover
+      background: var.$go-back-hover
