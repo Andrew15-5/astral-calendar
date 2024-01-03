@@ -6,16 +6,17 @@ Calendar for accountants.
 
 Features:
 
-- view events and their deadlines
-- filter by year, quarter and month
-- interactive calendars (hover and click)
-- hot-load spreadsheet data (auto extraction of data from spreadsheet files in `data/`)
+- View events and their deadlines.
+- Filter by year, quarter and month.
+- Interactive calendars (hover and click).
+- Hot-load spreadsheet data (auto extraction of data from spreadsheet files in `data/`).
 
 ## Usage
 
 ##### Notes:
 
 - You have to add spreadsheet file(s) to project (although it works without them).
+- You can get an example spreadsheet file from `data` branch in `data/`.
 - For convenience `alias j=just` can be used when using `just` command.
   - To install `just` with `cargo` (Rust package manager) run `cargo install just`.
 
