@@ -1,5 +1,16 @@
 # astral-calendar
 
+## Description
+
+Calendar for accountants.
+
+Features:
+
+- view events and their deadlines
+- filter by year, quarter and month
+- interactive calendars (hover and click)
+- hot-load spreadsheet data (auto extraction of data from spreadsheet files in `data/`)
+
 ## Usage
 
 ##### Notes:
@@ -55,18 +66,18 @@ just c # Watch TS & SASS files for client
 
 ## Environment variables
 
-- `PORT` --- port on which the server will be started (default: `3000`)
-- `DATA_DIR` --- directory where all the spreadsheet files go (default: `data`)
+- `PORT` — port on which the server will be started (default: `3000`)
+- `DATA_DIR` — directory where all the spreadsheet files go (default: `data`)
   - Automatically created (with `775`) if missing.
 - `SPREADSHEET_TO_CSV_DOCKER_IMAGE` (default: `andrew1555/ssconvert`)
   - Spreadsheet file's content is passed to stdin of container and CSV
     data is received in stdout.
-- `SPREADSHEET_FILE_REGEX_PATTERN` --- JavaScript regex pattern
+- `SPREADSHEET_FILE_REGEX_PATTERN` — JavaScript regex pattern
   (default: `.(ods|gnumeric|xlsx?)$`)
   - Most popular formats are included which can be processed by `ssconvert`.
-- `SPREADSHEET_FILE_REGEX_FLAGS` --- JavaScript regex flags (default: `i`)
+- `SPREADSHEET_FILE_REGEX_FLAGS` — JavaScript regex flags (default: `i`)
   - Upper and lower case letters in the spreadsheet file format
     are treated as identical.
-- `SPREADSHEET_COLUMN_NAME` --- column number with event name (default: `1`)
-- `SPREADSHEET_COLUMN_BEGIN` --- column number with event begin date (default: `6`)
-- `SPREADSHEET_COLUMN_END` --- column number with event end date (default: `7`)
+- `SPREADSHEET_COLUMN_NAME` — column number with event name (default: `1`)
+- `SPREADSHEET_COLUMN_BEGIN` — column number with event begin date (default: `6`)
+- `SPREADSHEET_COLUMN_END` — column number with event end date (default: `7`)
