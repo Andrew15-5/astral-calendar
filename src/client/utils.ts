@@ -39,6 +39,11 @@ export function get_day_elements(
   return day_elements as HTMLElement[]
 }
 
+export function get_date_from_year_month(year: number, month: Month) {
+  const month_index = month - 1
+  return new Date(year, month_index, 1)
+}
+
 function change_year(new_year: number) {
   const base = window.location.origin
   const path = window.location.pathname

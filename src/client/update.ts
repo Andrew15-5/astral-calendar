@@ -1,7 +1,7 @@
 // Copyright (C) 2023  Andrew Voynov
 // See license in LICENSE file or at https://www.gnu.org/licenses/agpl-3.0.txt
 import { month_names } from './i18n/default/calendar/strings'
-import { get_day_elements } from './utils'
+import { get_date_from_year_month, get_day_elements } from './utils'
 
 function update_calendar_text(calendar: Element, month: Month, year: number) {
   const text = calendar.querySelector('.header .month-year-text')
@@ -38,7 +38,7 @@ function update_calendar_days(calendar: Element, month: Month, year: number) {
   const day_elements = get_day_elements(calendar, '.cell')
   if (day_elements === null) return
 
-  const start_of_the_month = new Date(`${year}-${month}`)
+  const start_of_the_month = get_date_from_year_month(year, month)
   let first_week_day = start_of_the_month.getDay()
   if (first_week_day === 0) first_week_day = 7 // [Sunday;Saturday] -> [0;6]
 
@@ -161,7 +161,7 @@ function update_calendar_deadlines(
   const day_elements = get_day_elements(calendar, '.cell-wrapper')
   if (day_elements === null) return
 
-  const start_of_the_month = new Date(`${year}-${month}`)
+  const start_of_the_month = get_date_from_year_month(year, month)
   let first_week_day = start_of_the_month.getDay()
   if (first_week_day === 0) first_week_day = 7 // [Sunday;Saturday] -> [0;6]
 
